@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 
@@ -9,6 +9,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 })
 export class LoginComponent implements OnInit {
   
+  @Input()
+  resultadoHija : number;
   constructor() { }
 
   ngOnInit(): void {

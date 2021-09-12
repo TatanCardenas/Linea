@@ -1,16 +1,114 @@
-      CALCULADORA UDEC 2021 {{ title }}
-<br>
-<input type="number" [(ngModel)]="numero1"/> {{numero1}} <br>
-<input type="number" [(ngModel)]="numero2"/> {{numero2}} <br>
-<input type="button" value="Suma" (click)= "operar('s')">
-<input type="button" value="Resta" (click)= "operar('r')">
-<input type="button" value="Multiplicacion" (click)= "operar('m')">
-<input type="button" value="Division" (click) = "operar('d')">
-<br>
-        El resultado es : {{resultado}}
-<br>
 -------Hola----------
 <br>
-<mat-progress-bar  [mode] = "'buffer'" [bufferValue]="30" > </mat-progress-bar >
+<mat-progress-bar [mode]="'buffer'" [bufferValue]="30"> </mat-progress-bar>
 
-<app-login></app-login>
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
+      <mat-icon *ngIf="drawer.opened">close</mat-icon>
+    </button>
+    <h1 class="example-app-name">ENVIOS UDEC</h1>
+
+
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/perfil">
+        <mat-icon>account_box</mat-icon>
+        <span>Mi Perfil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </mat-menu>
+
+
+  </mat-toolbar>
+
+  <mat-drawer-container class="example-sidenav-content" autosize>
+    <mat-drawer #drawer style="width: 200px" mode="side">
+
+
+      <button mat-menu-item style="cursor: pointer">
+        <mat-icon>search</mat-icon>
+        <span>Buscar</span>
+      </button>
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item style="cursor: pointer">
+        <mat-icon>search</mat-icon>
+        <span>Buscar</span>
+      </button>
+      <mat-divider></mat-divider>
+
+
+      <button mat-menu-item style="cursor: pointer">
+        <mat-icon>search</mat-icon>
+        <span>Buscar</span>
+      </button>
+      <mat-divider></mat-divider>
+
+    </mat-drawer>
+
+    <div class="example-sidenav">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+      <br>
+      CALCULADORA UDEC 2021 {{ title }}
+      <br>
+      <input type="number" [(ngModel)]="numero1" /> {{numero1}} <br>
+      <input type="number" [(ngModel)]="numero2" /> {{numero2}} <br>
+      <input type="button" value="Suma" (click)="operar('s')"> <br>
+      <input type="button" value="Resta" (click)="operar('r')"> <br>
+      <input type="button" value="Multiplicacion" (click)="operar('m')"> <br>
+      <input type="button" value="Division" (click)="operar('d')"> <br>
+      <br>
+      El resultado es : {{resultado}}
+      <br>
+    </div>
+    
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef> Edad </th>
+          <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="semestre">
+          <th mat-header-cell *matHeaderCellDef> Semestre </th>
+          <td mat-cell *matCellDef="let element"> {{element.semestre}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>  
+    
+    
+  </mat-drawer-container>
+
+
+
+
+</div>
