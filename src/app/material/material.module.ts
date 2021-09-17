@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [],
@@ -21,7 +24,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatIconModule,
     MatDividerModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatFormFieldModule
+    
   ], exports :[
     MatProgressBarModule,
     MatTableModule,
@@ -30,7 +37,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatIconModule,
     MatDividerModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatAutocompleteModule,
+    FormsModule,
+    MatFormFieldModule
   ]
 })
 export class MaterialModule { }

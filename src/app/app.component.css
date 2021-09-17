@@ -17,8 +17,9 @@
     right: 0;
   }
   .example-sidenav-content {
-    display: flex;
+    
     height: 100%;
+    width: 100%;
   }
 
 .table {
