@@ -8,7 +8,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
 const routes: Routes = [
   {path: 'buscar', component: BuscarComponent},
   {path: 'ingresar', component: RegistroComponent},
-  {path: 'editar', component: EditarComponent}
+  {path: 'editar', component: EditarComponent},
+  {path: '**', component: BuscarComponent}
 ];
 
 @NgModule({

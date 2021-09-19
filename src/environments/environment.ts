@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  HOST: 'http://143.244.150.210/movitapp-back',
+
 };
 
 /*
