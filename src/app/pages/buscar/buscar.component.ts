@@ -1,9 +1,18 @@
 import { ScrollingVisibility } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Departamento } from 'src/app/_model/Departamento';
 import { DepartamentoService } from '../../_service/departamento.service';
+
+export interface Departamentos{
+  nombre: string;
+  idDepartamento: number;
+  buscar: MatButton;
+
+}
 
 @Component({
   selector: 'app-buscar',
@@ -11,23 +20,28 @@ import { DepartamentoService } from '../../_service/departamento.service';
   styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent implements OnInit {
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  displayedColumns: string[] = ['idDepartamento', 'nombre', "buscar"];
 
   constructor(private departamentoService: DepartamentoService) { }
 
+  departamentos: Departamento[];
+  columnas;
+  dataSource;
   ngOnInit(): void {
     console.log("Se ejecuto al iniciar")
     this.departamentoService.listar().subscribe(data =>{
-      console.log(data);
-      data.forEach(element => { console.log(`Codigo: ${element.idDepartamento} - Nombre: ${element.nombre}`)}) 
+      this.dataSource = data;
+      data.forEach(element => { console.log(
+        `Codigo: ${element.idDepartamento} 
+        - Nombre: ${element.nombre}`)
+        this.departamentos = data;
+        this.columnas =[
+          {titulo: "id", campo: element.idDepartamento},
+          {titulo: "Nombre", campo: element.nombre},
+          {titulo: "Buscar", campo: "buscar"}
+        ];
+      }) 
+        
     });
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 }

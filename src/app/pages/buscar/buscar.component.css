@@ -1,29 +1,29 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-    
+.example-spacer {
+    flex: 1 1 auto;
   }
   
-  .example-full-width {
-    width: 100%;
+  .example-sidenav {
+    padding: 30px;  
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
-  .titulo {
-    font-style: italic ;
-    font-size: xx-large;
-    text-align: center;
-    margin: 20px;
-    color: aqua;
+  .table {
+    width: 80%;
+    margin: 0 auto;
   }
 
-  .ejem {
-      display: flex;
-      text-align: left;
-      margin: 20px;
+  .prueba {
+      font-size: medium;
+      color:#5DC1B9;
+      font-style: italic;
   }
-
-  .barra {
-      animation-duration: 5000;
-      
-  }
+  

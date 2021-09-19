@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: 'buscar', component: BuscarComponent},
   {path: 'ingresar', component: RegistroComponent},
   {path: 'editar', component: EditarComponent},
-  {path: '**', component: BuscarComponent}
+  {path: '**', component: EditarComponent}
 ];
 
 @NgModule({
