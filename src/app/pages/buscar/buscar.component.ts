@@ -1,3 +1,4 @@
+import { DataSource } from '@angular/cdk/collections';
 import { ScrollingVisibility } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -11,7 +12,10 @@ export interface Departamentos{
   nombre: string;
   idDepartamento: number;
   buscar: MatButton;
-
+}
+export interface Ciudad{
+  nombreC: string;
+  idDepartC: number;
 }
 
 @Component({
@@ -21,19 +25,22 @@ export interface Departamentos{
 })
 export class BuscarComponent implements OnInit {
   displayedColumns: string[] = ['idDepartamento', 'nombre', "buscar"];
+  displayedColumnas: string[] = ['idDepartC', 'nombreC'];
 
   constructor(private departamentoService: DepartamentoService) { }
 
   departamentos: Departamento[];
   columnas;
   dataSource;
+
+  columnasC;
+  dataSourceC;
+
   ngOnInit(): void {
     console.log("Se ejecuto al iniciar")
     this.departamentoService.listar().subscribe(data =>{
       this.dataSource = data;
-      data.forEach(element => { console.log(
-        `Codigo: ${element.idDepartamento} 
-        - Nombre: ${element.nombre}`)
+      data.forEach(element => { 
         this.departamentos = data;
         this.columnas =[
           {titulo: "id", campo: element.idDepartamento},
@@ -43,5 +50,19 @@ export class BuscarComponent implements OnInit {
       }) 
         
     });
+  }
+  buscarId (idDepartamentoB: number){
+    this.departamentoService.listarCiudad(idDepartamentoB).subscribe(ciudad =>{
+      this.dataSourceC = ciudad;
+      ciudad.forEach(element => { console.log(
+        `Codigo: ${element.idCiudad} 
+        - Nombre: ${element.nombre}`)
+        this.columnasC =[
+          {titulo: "idCiudad", campo: element.idCiudad},
+          {titulo: "NombreC", campo: element.nombre}
+        ];  
+      })
+
+    })
   }
 }

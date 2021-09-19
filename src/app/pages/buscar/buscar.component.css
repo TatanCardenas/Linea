@@ -17,13 +17,19 @@
   }
 
   .table {
-    width: 80%;
-    margin: 0 auto;
+    width: 50%;
+    margin: 40px;
   }
 
   .prueba {
       font-size: medium;
       color:#5DC1B9;
       font-style: italic;
+  }
+
+  .example {
+    display: flex;
+    height: 100%;
+    align-items: baseline;
   }
   
