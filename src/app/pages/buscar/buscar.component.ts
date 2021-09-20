@@ -3,10 +3,12 @@ import { ScrollingVisibility } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { ThemePalette } from '@angular/material/core';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, timeout } from 'rxjs/operators';
 import { Departamento } from 'src/app/_model/Departamento';
 import { DepartamentoService } from '../../_service/departamento.service';
+import { LoaderService } from '../../_service/loader.service'
 
 export interface Departamentos{
   nombre: string;
@@ -24,10 +26,12 @@ export interface Ciudad{
   styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent implements OnInit {
+  mostrarBarra: boolean;
+  color: ThemePalette = 'accent';
   displayedColumns: string[] = ['idDepartamento', 'nombre', "buscar"];
   displayedColumnas: string[] = ['idDepartC', 'nombreC'];
 
-  constructor(private departamentoService: DepartamentoService) { }
+  constructor(private departamentoService: DepartamentoService, public loaderService: LoaderService) { }
 
   departamentos: Departamento[];
   columnas;
@@ -36,21 +40,29 @@ export class BuscarComponent implements OnInit {
   columnasC;
   dataSourceC;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log("Se ejecuto al iniciar")
-    this.departamentoService.listar().subscribe(data =>{
+    await this.delay(1500);
+    this.mostrarBarra = true;
+    this.departamentoService.listar().subscribe(async data =>{
       this.dataSource = data;
-      data.forEach(element => { 
+      data.forEach( element => { 
         this.departamentos = data;
         this.columnas =[
           {titulo: "id", campo: element.idDepartamento},
           {titulo: "Nombre", campo: element.nombre},
           {titulo: "Buscar", campo: "buscar"}
         ];
+        
+
       }) 
         
     });
   }
+  private delay(ms:number){
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   buscarId (idDepartamentoB: number){
     this.departamentoService.listarCiudad(idDepartamentoB).subscribe(ciudad =>{
       this.dataSourceC = ciudad;
@@ -62,7 +74,7 @@ export class BuscarComponent implements OnInit {
           {titulo: "NombreC", campo: element.nombre}
         ];  
       })
-
     })
   }
+    
 }
