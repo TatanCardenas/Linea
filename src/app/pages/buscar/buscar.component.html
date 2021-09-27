@@ -3,7 +3,7 @@
     <mat-progress-bar mode = "indeterminate"></mat-progress-bar>
   </div>
   <div class="example">
-    <table mat-table [dataSource]="dataSource" class="table">
+    <table *ngIf="!mostrar" mat-table [dataSource]="dataSource" class="table">
       <!-- Position Column -->
       <ng-container matColumnDef="idDepartamento">
         <th mat-header-cell *matHeaderCellDef class="prueba"> Codigo </th>
@@ -29,7 +29,7 @@
     </table>
   
     <!--Pintado de la tabla de ciudades-->
-    <table mat-table [dataSource]="dataSourceC" class="table">
+    <table *ngIf="!mostrarTabla" mat-table [dataSource]="dataSourceC" class="table">
       <!-- Position Column -->
       <ng-container matColumnDef="idDepartC">
         <th mat-header-cell *matHeaderCellDef class="prueba"> CodigoCiudad </th>

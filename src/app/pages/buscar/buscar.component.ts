@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { ThemePalette } from '@angular/material/core';
 import { Observable } from 'rxjs';
-import { map, startWith, timeout } from 'rxjs/operators';
+import { map, startWith, timeout, timestamp } from 'rxjs/operators';
 import { Departamento } from 'src/app/_model/Departamento';
 import { DepartamentoService } from '../../_service/departamento.service';
 import { LoaderService } from '../../_service/loader.service'
@@ -26,7 +26,9 @@ export interface Ciudad{
   styleUrls: ['./buscar.component.css']
 })
 export class BuscarComponent implements OnInit {
+  mostrar: boolean = true; 
   mostrarBarra: boolean;
+  mostrarTabla: boolean = true;
   color: ThemePalette = 'accent';
   displayedColumns: string[] = ['idDepartamento', 'nombre', "buscar"];
   displayedColumnas: string[] = ['idDepartC', 'nombreC'];
@@ -42,8 +44,9 @@ export class BuscarComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     console.log("Se ejecuto al iniciar")
-    await this.delay(1500);
+    await this.delay(1000);
     this.mostrarBarra = true;
+    this.mostrar = false;
     this.departamentoService.listar().subscribe(async data =>{
       this.dataSource = data;
       data.forEach( element => { 
@@ -53,17 +56,19 @@ export class BuscarComponent implements OnInit {
           {titulo: "Nombre", campo: element.nombre},
           {titulo: "Buscar", campo: "buscar"}
         ];
-        
-
-      }) 
-        
+      })        
     });
   }
   private delay(ms:number){
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  buscarId (idDepartamentoB: number){
+  async buscarId (idDepartamentoB: number){
+    this.mostrarBarra = false;
+    this.mostrarTabla = true;
+    await this.delay(1000);
+    this.mostrarBarra = true;
+    this.mostrarTabla = false;
     this.departamentoService.listarCiudad(idDepartamentoB).subscribe(ciudad =>{
       this.dataSourceC = ciudad;
       ciudad.forEach(element => { console.log(
