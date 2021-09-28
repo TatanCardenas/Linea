@@ -14,6 +14,9 @@ import { EditarComponent } from './pages/editar/editar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from 'src/app/_service/interceptor.service';
+import { DepartamentoComponent } from './pages/departamento/departamento.component';
+import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { InterceptorService } from 'src/app/_service/interceptor.service';
     LoginComponent,
     RegistroComponent,
     BuscarComponent,
-    EditarComponent
+    EditarComponent,
+    DepartamentoComponent,
+    
   ],
   imports: [
     BrowserModule,

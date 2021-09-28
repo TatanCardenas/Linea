@@ -1,0 +1,53 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .example-sidenav {
+    padding: 30px;  
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .table {
+    width: 90%;
+    margin-left: 40px;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  .prueba {
+      font-size: medium;
+      color:#5DC1B9;
+      font-style: italic;
+  }
+
+  .example {
+    display: flex;
+    height: 100%;
+    align-items: baseline;
+  }
+  .loader-container {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+  }
+
+  .paginator{
+    width: 90%;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 10px;
+  }
+
+  th.mat-sort-header-sorted {
+    color: rgb(192, 186, 186);
+  }
