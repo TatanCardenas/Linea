@@ -30,27 +30,27 @@
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" routerLink='/buscar'>
+      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
         <mat-icon>search</mat-icon>
         <span>Departamentos</span>
         
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" routerLink='/ingresar'>
+      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/ingresar']">
         <mat-icon>manage accounts</mat-icon>
         <span>Ingresar</span>
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" routerLink='/editar'>
+      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/editar']">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" routerLink='/departamento'>
-        <mat-icon>room</mat-icon>
+      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/departamento']">
+        <mat-icon>pets</mat-icon>
         <span>Departamentos</span>
       </button>
       <mat-divider></mat-divider>

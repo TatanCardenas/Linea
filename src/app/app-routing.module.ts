@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'ingresar', component: RegistroComponent},
   {path: 'editar', component: EditarComponent},
   {path: 'departamento', component: DepartamentoComponent, children:[
-    {path: 'ciudad', component: CiudadComponent}
+    {path: 'ciudad/:id', component: CiudadComponent}
   ]},
   {path: '**', component: EditarComponent}
 ];
