@@ -1,1 +1,22 @@
-<p>ciudad works!</p>
+    <!--Pintado de la tabla de ciudades-->
+    <table mat-table [dataSource]="dataSourceC" class="table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="idDepartC">
+            <th mat-header-cell *matHeaderCellDef class="prueba"> CodigoCiudad </th>
+            <td mat-cell *matCellDef="let element"> {{element.idCiudad}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombreC">
+            <th mat-header-cell *matHeaderCellDef class="prueba"> Ciudad</th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnas;"></tr>
+    </table>
+    <mat-paginator class="paginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" #PCiudad>
+    </mat-paginator>
+    <button mat-fab color="accent" style="float: right;" [routerLink]="['/departamento']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>

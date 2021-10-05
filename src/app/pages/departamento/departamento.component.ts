@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Ciudad } from 'src/app/_model/Ciudad';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-departamento',
@@ -23,16 +24,16 @@ export class DepartamentoComponent implements OnInit {
   mostrarBarra: boolean;
   mostrarTabla: boolean = true;
   displayedColumns: string[] = ['idDepartamento', 'nombre', "buscar"];
-  displayedColumnas: string[] = ['idDepartC', 'nombreC'];
+  
   dataSource = new MatTableDataSource<Departamento>();
-  dataSourceC = new MatTableDataSource<Ciudad>();
+  
 
-  flagCiudad = this.dataSourceC.data.length > 0 ? true:false;
 @ViewChild('PDepartamento') paginator: MatPaginator;
-@ViewChild('PCiudad') CiudadPaginator: MatPaginator;
+
 @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private departamentoService: DepartamentoService) { }
+  constructor(private departamentoService: DepartamentoService,
+              public route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
     await this.delay(1000);
@@ -47,24 +48,6 @@ export class DepartamentoComponent implements OnInit {
   }
   private delay(ms:number){
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  async buscarId (idDepartamentoB: number){
-    this.mostrarBarra = false;
-    this.mostrarTabla = true;
-    this.mostrar = true;
-    await this.delay(500);
-    this.mostrarBarra = true;
-    this.mostrarTabla = false;
-    this.departamentoService.listarCiudad(idDepartamentoB).subscribe(ciudad =>{
-      this.dataSourceC = new MatTableDataSource(ciudad);
-      this.dataSourceC.paginator = this.CiudadPaginator;
-      this.flagCiudad = this.dataSourceC.data.length > 0 ? true:false;
-    })
-    
-  }
-
-  cambiarEstadoFlag(): void{
-    this.flagCiudad = !this.flagCiudad;
   }
 
   applyFilter(event: Event){

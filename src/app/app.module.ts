@@ -26,6 +26,7 @@ import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
     BuscarComponent,
     EditarComponent,
     DepartamentoComponent,
+    CiudadComponent
     
   ],
   imports: [
