@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from 'src/app/_service/interceptor.service';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
+import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
     BuscarComponent,
     EditarComponent,
     DepartamentoComponent,
-    CiudadComponent
+    CiudadComponent,
+    VehiculoComponent
     
   ],
   imports: [

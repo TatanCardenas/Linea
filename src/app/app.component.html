@@ -55,6 +55,12 @@
       </button>
       <mat-divider></mat-divider>
 
+      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/vehiculo']">
+        <mat-icon>local_shipping</mat-icon>
+        <span>Vehiculos</span>
+      </button>
+      <mat-divider></mat-divider>
+
     </mat-drawer>
 
     <div class="example-sidenav-content">

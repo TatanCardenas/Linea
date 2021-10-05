@@ -1,0 +1,13 @@
+.table {
+    width: 90%;
+    margin-left: 40px;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  .paginator{
+    width: 90%;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 10px;
+  }

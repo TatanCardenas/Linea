@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -31,7 +32,8 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
     
   ], exports :[
     MatProgressBarModule,
@@ -46,7 +48,8 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }
