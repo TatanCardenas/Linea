@@ -6,6 +6,7 @@ import { async } from 'rxjs/internal/scheduler/async';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 import { Contenido } from 'src/app/_model/Contenido';
 import { VehiculoService } from 'src/app/_service/vehiculo.service'
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-vehiculo',
@@ -19,28 +20,63 @@ export class VehiculoComponent implements OnInit {
   public totalPages: number;
   public totalElement: number;
   public pageAct: number;
-  public paginaSize;
+  public paginaSize = 5;
+
+  // MatPaginator Inputs
+  length: number;
+  pageSize = 5;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageIndex = 0;
+
   @ViewChild('PVehiculo') VehiculoPaginator: MatPaginator;
 
   constructor(private vehiculoService: VehiculoService,
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.vehiculoService.listarVehiculo(0, this.paginaSize).subscribe(data => {
+
+    this.vehiculoService.listarVehiculo(2, this.pageSize).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
+      this.length = data.totalElements;
+      //this.index = this.pageEvent.pageIndex;
       this.totalElement = data.totalElements;
 
-      console.log(`PaginasTotales: ${this.totalPages}`);
+      console.log(`PaginasTotales: ${this.totalPages} - Act: ${this.pageIndex}`);
       data.content.forEach(element => {
         console.log(`Placa: ${element.placa} - Marca: ${element.marca}`);
       });
-      this.dataSource.paginator = this.VehiculoPaginator;
+      //this.dataSource.paginator = this.VehiculoPaginator;
 
 /*       data.pegeable.forEach(pg =>{
         this.pageAct = pg.pageNumber;
         console.log(`Pagina actual: ${this.pageAct}`);
       }); */
+    });
+  }
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
+  public listarV(pageEvent): void{
+    let pageI = this.pageEvent.pageIndex;
+    this.vehiculoService.listarVehiculo(pageI, this.pageSize).subscribe(data => {
+      (this.dataSource.data = data.content)
+      this.totalPages = data.totalPages;
+      this.length = data.totalElements;
+      //this.index = this.pageEvent.pageIndex;
+      this.totalElement = data.totalElements;
+
+      console.log(`Pagina....PaginasT: ${this.totalPages} - Act: ${pageI}`);
+      data.content.forEach(element => {
+        console.log(`Placa: ${element.placa} - Marca: ${element.marca}`);
+      });
     });
   }
 

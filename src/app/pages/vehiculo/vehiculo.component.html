@@ -32,9 +32,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator class="paginator" [pageSize]= "paginaSize" [pageSizeOptions]="[5, 10, 25, 100]" 
-    #PVehiculo>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = $event; listarV(pageEvent.pageIndex)">
     </mat-paginator>
+
 
 
 
