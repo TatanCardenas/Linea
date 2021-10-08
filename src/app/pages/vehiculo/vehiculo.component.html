@@ -33,13 +33,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    <mat-paginator class="paginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
         (page)="pageEvent = $event; listarV(pageEvent.pageIndex)">
     </mat-paginator>
-
-
-
-
 </div>
 
 <router-outlet></router-outlet>

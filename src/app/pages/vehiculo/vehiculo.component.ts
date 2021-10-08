@@ -43,15 +43,6 @@ export class VehiculoComponent implements OnInit {
       this.totalElement = data.totalElements;
 
       console.log(`PaginasTotales: ${this.totalPages} - Act: ${this.pageIndex}`);
-      data.content.forEach(element => {
-        console.log(`Placa: ${element.placa} - Marca: ${element.marca}`);
-      });
-      //this.dataSource.paginator = this.VehiculoPaginator;
-
-/*       data.pegeable.forEach(pg =>{
-        this.pageAct = pg.pageNumber;
-        console.log(`Pagina actual: ${this.pageAct}`);
-      }); */
     });
   }
 
@@ -66,17 +57,14 @@ export class VehiculoComponent implements OnInit {
 
   public listarV(pageEvent): void{
     let pageI = this.pageEvent.pageIndex;
-    this.vehiculoService.listarVehiculo(pageI, this.pageSize).subscribe(data => {
+    let pageS = this.pageEvent.pageSize;
+    this.vehiculoService.listarVehiculo(pageI,pageS).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
       this.length = data.totalElements;
       //this.index = this.pageEvent.pageIndex;
       this.totalElement = data.totalElements;
-
-      console.log(`Pagina....PaginasT: ${this.totalPages} - Act: ${pageI}`);
-      data.content.forEach(element => {
-        console.log(`Placa: ${element.placa} - Marca: ${element.marca}`);
-      });
+      console.log(`PaginasTotales: ${this.totalPages} - Act: ${pageI}`);
     });
   }
 
