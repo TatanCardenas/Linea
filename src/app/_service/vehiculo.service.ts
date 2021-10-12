@@ -23,4 +23,8 @@ export class VehiculoService {
   public editar(vehiculo: Vehiculo){
     return this.http.put(`${this.url}/editar`,vehiculo)
   }
+
+  public vehiculoId(idVehiculo:number ){
+    return this.http.get<Vehiculo>(`${this.url}/listar/${idVehiculo}`)
+  }
 }

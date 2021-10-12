@@ -17,6 +17,7 @@ import { InterceptorService } from 'src/app/_service/interceptor.service';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
+import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
     EditarComponent,
     DepartamentoComponent,
     CiudadComponent,
-    VehiculoComponent
+    VehiculoComponent,
+    AgregarVComponent
     
   ],
   imports: [

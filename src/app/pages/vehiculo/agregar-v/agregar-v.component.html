@@ -1,0 +1,45 @@
+<button mat-fab color="accent" style="float: left; margin-left: 10px;" [routerLink]="['/vehiculo']">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<form [formGroup]="form" class="form-inline">
+  <div class="formularioI">
+    <div>
+      <mat-form-field appearance="outline" class="tamano">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Placa" formControlName="Placa" class="formu">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="tamano">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Modelo" formControlName="Modelo" class="formu">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="tamano">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Marca" formControlName="Marca" class="formu">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="tamano">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="T Vehiculo" formControlName="TVehiculo" class="formu">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="tamano">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Capacidad" formControlName="Capacidad" class="formu">
+      </mat-form-field>
+    </div>
+    <div class="centro">
+      <button mat-raised-button [disabled]="form.invalid" color="primary"
+        style="float: left; margin-left: 35px; margin-top: 10px;" 
+        class="boton" type="submit" (click)="editarv($event)">Editar
+      </button>
+    </div>
+  </div>
+</form>
+

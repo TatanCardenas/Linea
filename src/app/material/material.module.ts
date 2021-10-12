@@ -10,11 +10,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -33,7 +35,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatInputModule
     
   ], exports :[
     MatProgressBarModule,
@@ -49,7 +53,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
