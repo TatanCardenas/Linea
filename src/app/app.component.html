@@ -1,7 +1,8 @@
-
 <div class="example-container">
+  <div [hidden]="flagProgressBar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
   <mat-toolbar color="primary" class="example-toolbar">
-
     <button mat-icon-button (click)="drawer.toggle()">
       <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
       <mat-icon *ngIf="drawer.opened">close</mat-icon>
@@ -33,7 +34,7 @@
       <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
         <mat-icon>search</mat-icon>
         <span>Departamentos</span>
-        
+
       </button>
       <mat-divider></mat-divider>
 
@@ -64,9 +65,9 @@
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
-    
+
   </mat-drawer-container>
 
 </div>

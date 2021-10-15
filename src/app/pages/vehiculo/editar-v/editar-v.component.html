@@ -1,0 +1,51 @@
+<button mat-fab color="accent" style="float: left; margin-left: 10px;" [routerLink]="['/vehiculo']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  
+  <form [formGroup]="form" class="form-inline">
+    <div class="formularioI">
+      <div>
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>PLACA</mat-label>
+          <input matInput placeholder="AAA-111" formControlName="placa" class="formu">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>MODELO</mat-label>
+          <input matInput placeholder="Ej: 2020" formControlName="modelo" class="formu">
+        </mat-form-field>
+      </div>
+  
+      <div>
+        <mat-form-field appearance="fill">
+        <mat-label>MARCA</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="car" formControlName="marca">
+          <mat-option *ngFor="let car of cars" [value]="car.value">
+            {{car.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>TIPO VEHICULO</mat-label>
+          <input matInput placeholder="Ej" formControlName="tipoVehiuclo" class="formu">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>CAPACIDAD</mat-label>
+          <input matInput placeholder="Ej: 70kg" formControlName="capacidad" class="formu">
+        </mat-form-field>
+      </div>
+      <div class="centro">
+        <button mat-raised-button [disabled]="form.invalid" color="primary"
+          style="float: left; margin-left: 35px; margin-top: 10px;" 
+          class="boton" type="submit" (click)="editarv($event)">Editar
+        </button>
+      </div>
+      
+    </div>
+  </form>
+  

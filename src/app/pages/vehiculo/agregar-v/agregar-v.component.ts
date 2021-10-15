@@ -2,44 +2,63 @@ import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+interface Car {
+  value: string;
+  viewValue: string;
+}
+
+interface Tipo {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-agregar-v',
   templateUrl: './agregar-v.component.html',
   styleUrls: ['./agregar-v.component.css']
 })
+
 export class AgregarVComponent implements OnInit {
   form: FormGroup;
-  placa: string;
-  modelo: string;
-  marca: string;
-  tipo: string;
-  capacidad: string;
+  private idVehiculo: number;
 
-  datosVehiculo = new Vehiculo;
+  private datosVehiculo = new Vehiculo;
+
+  selectedValue: string;
+  selectedCar: string;
+
+  cars: Car[] = [
+    {value: 'Toyota', viewValue: 'Toyota'},
+    {value: 'Chevrolet', viewValue: 'Chevrolet'},
+    {value: 'Renault', viewValue: 'Renault'},
+    {value: 'Mazda', viewValue: 'Mazda'},
+    {value: 'Mercedes', viewValue: 'Mercedes'},
+    {value: 'BMW', viewValue: 'BMW'},
+    {value: 'AlfaRomeo', viewValue: 'Alfa Romeo'},
+    {value: 'Audi', viewValue: 'Audi'},
+    {value: 'Ferrari', viewValue: 'Ferrari'},
+    {value: 'Peugeot', viewValue: 'Peugeot'},
+    {value: 'Porche', viewValue: 'Porche'}
+  ];
+
+  tipos: Tipo[] = [
+    {value: 'Carro', viewValue: 'Carro'},
+    {value: 'Camioneta', viewValue: 'Camioneta'},
+    {value: 'Furgon', viewValue: 'Furgon'},
+    {value: 'Campero', viewValue: 'Campero'}
+  ];
 
   constructor(private vehiculoService: VehiculoService,
+    private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
-    this.route.params.subscribe((params: Params) => {        //Obtener parametros que estan en le url
-      let idVehiculo = params['idV'];
-      console.log("Antes.");
-      this.vehiculoService.vehiculoId(idVehiculo).subscribe(data => {
-
-        this.datosVehiculo.placa = data.placa;
-        this.datosVehiculo.modelo = data.modelo;
-        this.datosVehiculo.marca = data.marca;
-        this.datosVehiculo.tipoVehiuclo = data.tipoVehiuclo;
-        this.datosVehiculo.capacidad = data.capacidad;
-        console.log(`Placa: ${data.placa} - Model ${data.modelo}`);
-        this.buildFrom();
-      });
-      
-    });
     
   }
 
@@ -48,27 +67,39 @@ export class AgregarVComponent implements OnInit {
   }
 
   private buildFrom() {
-    console.log("Hola");
+    
     this.form = this.formBuilder.group({
-      Placa: [this.datosVehiculo.placa, [Validators.required]],
-      Modelo: [this.datosVehiculo.modelo, [Validators.required]],
-      Marca: [this.datosVehiculo.marca, [Validators.required]],
-      TVehiculo: [this.datosVehiculo.tipoVehiuclo, [Validators.required]],
-      Capacidad: [this.datosVehiculo.capacidad, [Validators.required]],
+      
+      placa: [this.datosVehiculo.placa, [Validators.required,Validators.maxLength(7), Validators.minLength(7),Validators.pattern(/[a-zA-Z ]{3}[-]\d{3}/)]],
+      modelo: [this.datosVehiculo.modelo, [Validators.required,Validators.min(1998), Validators.max(2022)]],
+      marca: [this.datosVehiculo.marca, [Validators.required]],
+      tipoVehiuclo: [this.datosVehiculo.tipoVehiuclo, [Validators.required]],
+      capacidad: [this.datosVehiculo.capacidad, [Validators.required, Validators.max(12000), Validators.min(20),Validators.pattern(/^\d+(kg|KG|Kg)$/)]],
     });
   }
 
-  save(event: Event) {
-    event.preventDefault();
+  guardarv(event: Event){
+    
     const value = this.form.value;
-    console.log(value);
+    
+    this.datosVehiculo = this.form.value;
+
+     this.vehiculoService.guardarVehiculo(this.datosVehiculo).subscribe(data =>{
+      console.log(data);
+      this.openSnackBar("Vehiculo guardado correctamente");
+      this.router.navigate(['/vehiculo']);
+    }, err => {
+      
+      this.openSnackBar(err.error.message)    
+    }) 
+
   }
 
-  editarv(event: Event){
-    console.log("EDITAR");
-    event.preventDefault();
-    const value = this.form.value;
-    console.log(value);
+  private openSnackBar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Información', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
-
 }

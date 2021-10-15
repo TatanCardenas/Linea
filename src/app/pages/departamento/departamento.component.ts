@@ -12,6 +12,7 @@ import { Ciudad } from 'src/app/_model/Ciudad';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
+import { ProgressService } from 'src/app/_service/progress.service';
 
 @Component({
   selector: 'app-departamento',
@@ -33,17 +34,22 @@ export class DepartamentoComponent implements OnInit {
 @ViewChild(MatSort) sort: MatSort;
 
   constructor(private departamentoService: DepartamentoService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private progressService: ProgressService) { }
 
-  async ngOnInit(): Promise<void> {
-    await this.delay(1000);
-    this.mostrarBarra = true;
+  async ngOnInit() {
+    
+    this.progressService.progressBarReactiva.next(false);
+    //this.mostrarBarra = true;
+    await new Promise(f => setTimeout(f,3000));
     this.departamentoService.listar().subscribe(async data =>{
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
+      this.progressService.progressBarReactiva.next(true);
     });
-    this.mostrar = false;
+    
+    //this.mostrar = false;
     
   }
   private delay(ms:number){

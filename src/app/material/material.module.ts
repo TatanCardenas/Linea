@@ -17,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,8 @@ import { MatInputModule } from '@angular/material/input';
     MatSortModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
     
   ], exports :[
     MatProgressBarModule,
@@ -55,7 +57,8 @@ import { MatInputModule } from '@angular/material/input';
     MatSortModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

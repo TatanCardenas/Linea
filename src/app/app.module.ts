@@ -18,6 +18,10 @@ import { DepartamentoComponent } from './pages/departamento/departamento.compone
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
 import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ErrorInterceptorService } from './_share/error-interceptor.service';
+import { PageErrorComponent } from './pages/page-error/page-error.component';
+import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
 
 
 @NgModule({
@@ -30,7 +34,10 @@ import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.componen
     DepartamentoComponent,
     CiudadComponent,
     VehiculoComponent,
-    AgregarVComponent
+    AgregarVComponent,
+    NotFoundComponent,
+    PageErrorComponent,
+    EditarVComponent,
     
   ],
   imports: [
@@ -42,7 +49,7 @@ import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.componen
     
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

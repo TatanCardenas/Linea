@@ -1,45 +1,95 @@
 <button mat-fab color="accent" style="float: left; margin-left: 10px;" [routerLink]="['/vehiculo']">
   <mat-icon>arrow_back</mat-icon>
 </button>
+<title fontSize="long" margin="center">Añadir Vehiculo</title>
 <form [formGroup]="form" class="form-inline">
   <div class="formularioI">
     <div>
       <mat-form-field appearance="outline" class="tamano">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placa" formControlName="Placa" class="formu">
+        <mat-label>PLACA</mat-label>
+        <input matInput placeholder="AAA-111" formControlName="placa" class="formu">       
+        <mat-hint *ngIf="form.get('placa').errors && form.get('placa').touched">
+          <p *ngIf="form.get('placa').hasError('required')">
+            Se requiere este campo
+          </p>
+          <p *ngIf="form.get('placa').hasError('maxlength')">
+            La placa no puede tener mas de 7 caracteres
+          </p>
+          <p *ngIf="form.get('placa').hasError('minlength')">
+            La placa no puede tener menos de 7 caracteres
+          </p>
+          <p *ngIf="form.get('placa').hasError('pattern')">
+            La placa debe tener el formato AAA-111
+          </p>
+        </mat-hint>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="outline" class="tamano">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Modelo" formControlName="Modelo" class="formu">
+        <mat-label>MODELO</mat-label>
+        <input matInput placeholder="Ej: 2020" formControlName="modelo" class="formu">
+        <mat-hint *ngIf="form.get('modelo').errors && form.get('modelo').touched">
+          <p *ngIf="form.get('modelo').hasError('required')">
+            Se requiere este campo
+          </p>
+          <p *ngIf="form.get('modelo').hasError('max')">
+            El modelo no puede ser superior al año 2022
+          </p>
+          <p *ngIf="form.get('modelo').hasError('min')">
+            El modelo no puede ser inferior al año 1998
+          </p>
+          
+        </mat-hint>
       </mat-form-field>
     </div>
 
     <div>
-      <mat-form-field appearance="outline" class="tamano">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Marca" formControlName="Marca" class="formu">
+      <mat-form-field appearance="fill">
+        <mat-label>MARCA</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="car" formControlName="marca">
+          <mat-option *ngFor="let car of cars" [value]="car.value">
+            {{car.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>TIPO VEHICULO</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="car" formControlName="tipoVehiuclo">
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+            {{tipo.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="outline" class="tamano">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="T Vehiculo" formControlName="TVehiculo" class="formu">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" class="tamano">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Capacidad" formControlName="Capacidad" class="formu">
+        <mat-label>CAPACIDAD</mat-label>
+        <input matInput placeholder="Ej: 70kg" formControlName="capacidad" class="formu">
+        <mat-hint *ngIf="form.get('capacidad').errors && form.get('placa').touched">
+          <p *ngIf="form.get('capacidad').hasError('required')">
+            Se requiere este campo
+          </p>
+          <p *ngIf="form.get('capacidad').hasError('maxlength')">
+            La placa no puede tener mas de 7 caracteres
+          </p>
+          <p *ngIf="form.get('capacidad').hasError('min')">
+            La placa no puede ser menor de 20Kg
+          </p>
+          <p *ngIf="form.get('capacidad').hasError('pattern')">
+            
+          </p>
+        </mat-hint>
       </mat-form-field>
     </div>
     <div class="centro">
       <button mat-raised-button [disabled]="form.invalid" color="primary"
-        style="float: left; margin-left: 35px; margin-top: 10px;" 
-        class="boton" type="submit" (click)="editarv($event)">Editar
+        style="float: left; margin-left: 35px; margin-top: 10px;" class="boton" type="submit"
+        (click)="guardarv($event)">Añadir
+        <mat-icon>bookmark</mat-icon>
       </button>
     </div>
+
   </div>
 </form>
-

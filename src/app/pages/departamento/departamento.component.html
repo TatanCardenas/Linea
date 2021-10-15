@@ -1,8 +1,11 @@
 
-    <div *ngIf="!mostrarBarra" class="loader-container" [color]="color">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
     <div [hidden]="route.children.length !== 0">
+        <div class="margen">
+            <mat-form-field class="margen">
+                <mat-label>Filtro</mat-label>
+                <input matInput class="margen" (keyup)="applyFilter($event)" placeholder="Filtrar" #input>
+            </mat-form-field>
+        </div> 
         <table mat-table [dataSource]="dataSource" matSort class="table">
             <!-- Position Column -->
             <ng-container matColumnDef="idDepartamento">

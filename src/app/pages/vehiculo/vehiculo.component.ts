@@ -9,6 +9,7 @@ import { VehiculoService } from 'src/app/_service/vehiculo.service'
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
+import { ProgressService } from 'src/app/_service/progress.service';
 
 
 @Component({
@@ -36,10 +37,12 @@ export class VehiculoComponent implements OnInit {
 
   constructor(private vehiculoService: VehiculoService,
               private _snackBar: MatSnackBar,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private progressService: ProgressService) { }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    this.progressService.progressBarReactiva.next(false);
+    await new Promise(f => setTimeout(f,1500));
     this.vehiculoService.listarVehiculo(0, this.pageSize).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
@@ -47,7 +50,7 @@ export class VehiculoComponent implements OnInit {
       //this.index = this.pageEvent.pageIndex;
       this.totalElement = data.totalElements;
       this.dataSource.sort = this.sort;
-
+      this.progressService.progressBarReactiva.next(true);
       console.log(`PaginasTotales: ${this.totalPages} - Act: ${this.pageIndex}`);
     });
   }
@@ -61,9 +64,11 @@ export class VehiculoComponent implements OnInit {
     }
   }
 
-  public listarV(pageEvent): void{
+  public async listarV(pageEvent): Promise<void>{
     let pageI = this.pageEvent.pageIndex;
     let pageS = this.pageEvent.pageSize;
+    //this.progressService.progressBarReactiva.next(false);
+    //await new Promise(f => setTimeout(f,1500));
     this.vehiculoService.listarVehiculo(pageI,pageS).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
@@ -71,6 +76,7 @@ export class VehiculoComponent implements OnInit {
       //this.index = this.pageEvent.pageIndex;
       this.totalElement = data.totalElements;
       console.log(`PaginasTotales: ${this.totalPages} - Act: ${pageI}`);
+      //this.progressService.progressBarReactiva.next(true);
     });
   }
 

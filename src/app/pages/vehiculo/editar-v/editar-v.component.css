@@ -1,0 +1,27 @@
+.formularioI{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: 60%;
+    margin: 2% auto;
+    height: auto;
+}
+.tamano{
+    width:300px;
+    height:100px;
+}
+
+.formu{
+    width: 80px;
+    height:30px;
+    font-size: medium;
+}
+
+.boton{
+    width: 100px;
+    height:45px;
+    font-size: medium;
+}
+
+.centro{
+    margin: 2% auto;
+}

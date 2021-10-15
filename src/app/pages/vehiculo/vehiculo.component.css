@@ -11,3 +11,18 @@
     margin-left: 40px;
     margin-right: 10px;
   }
+
+  .margen{
+    
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  .boton{
+    font-style: italic;
+  }
+
+  .button{
+    margin-right: 20px;
+    margin-top: 15px;
+  }

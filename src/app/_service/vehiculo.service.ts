@@ -16,15 +16,20 @@ export class VehiculoService {
     return this.http.get<Contenido>(`${this.url}/pageable?page=${page}&size=${size}`);
   }
 
-  public guardar(vehiculo: Vehiculo){
+  public guardarVehiculo(vehiculo: Vehiculo){
     return this.http.post(`${this.url}/guardar`,vehiculo);
   }
 
-  public editar(vehiculo: Vehiculo){
+  public editarVehiculo(vehiculo: Vehiculo){
     return this.http.put(`${this.url}/editar`,vehiculo)
+  }
+
+  public editarVehiculoError(vehiculo: Vehiculo){
+    return this.http.post(`${this.url}/editar`,vehiculo)
   }
 
   public vehiculoId(idVehiculo:number ){
     return this.http.get<Vehiculo>(`${this.url}/listar/${idVehiculo}`)
   }
+
 }
