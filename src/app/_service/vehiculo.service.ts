@@ -3,14 +3,25 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Vehiculo } from '../_model/Vehiculo';
 import { Contenido } from '../_model/Contenido';
+import { EMPTY, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiculoService {
   private url : string = `${environment.HOST}/vehiculos`;
-
+  paginaReactiva= new Subject<boolean>();
+  public paginaR: boolean;
+  
   constructor(private http: HttpClient) { }
+
+  public recargarPagina(recargar: boolean){
+    if(recargar == true ){
+      return window.location.reload();
+    }else{
+      return EMPTY;
+    }
+  }
 
   public listarVehiculo(page: number, size: number){
     return this.http.get<Contenido>(`${this.url}/pageable?page=${page}&size=${size}`);

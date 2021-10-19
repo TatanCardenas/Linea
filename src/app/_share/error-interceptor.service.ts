@@ -34,9 +34,9 @@ export class ErrorInterceptorService implements HttpInterceptor{
           if(err.error.status == 400) {
             if(err.error.message[0]=='-'){
               this.openSnackBar(err.error.message.slice(4));
-              this.guardarError(err.error);
+              
             }else{
-              this.openSnackBar(err.error.message)
+              this.openSnackBar("Ocurrio un error, intente mas tarde")
             }
                 
           } else if(err.error.status == 404) {
@@ -46,7 +46,8 @@ export class ErrorInterceptorService implements HttpInterceptor{
                 console.log(err.error.message);
                 this.openSnackBar("Error, metodo no soportado");
           } else if(err.error.status == 415) {
-                this.openSnackBar(err.error.message);
+                //this.openSnackBar(err.error.message);
+                this.router.navigate(['/error']);
           } else  if(err.error.status == 500) {
                 this.router.navigate(['/error']);
           }else{
@@ -67,18 +68,5 @@ export class ErrorInterceptorService implements HttpInterceptor{
     });
   }
 
-  private guardarError(error: any){
-    const xhttp = new XMLHttpRequest();
-    var data = new Array();
-    xhttp.open('GET', 'errores.txt', true);
-    xhttp.send();
-    xhttp.onreadystatechange = function(){
-      if(this.readyState == 4 && this.status == 200){
-        console.log(this.responseText)
-      }
-    
-    }
-    /* var txt = xhttp.responseText;
-    console.log(txt); */
-  }
+
 }

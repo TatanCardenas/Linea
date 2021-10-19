@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 import { VehiculoService } from 'src/app/_service/vehiculo.service';
 
 interface Car {
+  valueC: string;
+  viewValueC: string;
+}
+interface Tipo {
   value: string;
   viewValue: string;
 }
@@ -25,23 +29,31 @@ export class EditarVComponent implements OnInit {
   selectedCar: string;
 
   cars: Car[] = [
-    {value: 'Toyota', viewValue: 'Toyota'},
-    {value: 'Chevrolet', viewValue: 'Chevrolet'},
-    {value: 'Renault', viewValue: 'Renault'},
-    {value: 'Mazda', viewValue: 'Mazda'},
-    {value: 'Mercedes', viewValue: 'Mercedes'},
-    {value: 'BMW', viewValue: 'BMW'},
-    {value: 'AlfaRomeo', viewValue: 'Alfa Romeo'},
-    {value: 'Audi', viewValue: 'Audi'},
-    {value: 'Ferrari', viewValue: 'Ferrari'},
-    {value: 'Peugeot', viewValue: 'Peugeot'},
-    {value: 'Porche', viewValue: 'Porche'}
+    {valueC: 'Toyota', viewValueC: 'Toyota'},
+    {valueC: 'Chevrolet', viewValueC: 'Chevrolet'},
+    {valueC: 'Renault', viewValueC: 'Renault'},
+    {valueC: 'Mazda', viewValueC: 'Mazda'},
+    {valueC: 'Mercedes', viewValueC: 'Mercedes'},
+    {valueC: 'BMW', viewValueC: 'BMW'},
+    {valueC: 'AlfaRomeo', viewValueC: 'Alfa Romeo'},
+    {valueC: 'Audi', viewValueC: 'Audi'},
+    {valueC: 'Ferrari', viewValueC: 'Ferrari'},
+    {valueC: 'Peugeot', viewValueC: 'Peugeot'},
+    {valueC: 'Porche', viewValueC: 'Porche'}
+  ];
+
+  tipos: Tipo[] = [
+    {value: 'Carro', viewValue: 'Carro'},
+    {value: 'Camioneta', viewValue: 'Camioneta'},
+    {value: 'Furgon', viewValue: 'Furgon'},
+    {value: 'Campero', viewValue: 'Campero'}
   ];
 
   constructor(private vehiculoService: VehiculoService,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
 
       this.route.params.subscribe((params: Params) => {        //Obtener parametros que estan en le url
         this.idVehiculo = params['idV'];
@@ -68,11 +80,11 @@ export class EditarVComponent implements OnInit {
     
     this.form = this.formBuilder.group({
       
-      placa: [this.datosVehiculo.placa, [Validators.required,Validators.maxLength(7), Validators.minLength(7),Validators.pattern(/[a-zA-Z ]{3}[-]\d{3}/)]],
-      modelo: [this.datosVehiculo.modelo, [Validators.required, Validators.min(1998), Validators.max(2022)]],
-      marca: [this.datosVehiculo.marca,],
+      placa: [this.datosVehiculo.placa, [Validators.required,Validators.maxLength(7), Validators.minLength(7),Validators.pattern(/[A-Z ]{3}[-]\d{3}/)]],
+      modelo: [this.datosVehiculo.modelo, [Validators.required, Validators.min(1998), Validators.max(2022), Validators.pattern(/^[0-9]\d+$/)]],
+      marca: [this.datosVehiculo.marca,[Validators.required, Validators.minLength(3)]],
       tipoVehiuclo: [this.datosVehiculo.tipoVehiuclo, [Validators.required]],
-      capacidad: [this.datosVehiculo.capacidad, [Validators.required]],
+      capacidad: [this.datosVehiculo.capacidad, [Validators.required,Validators.max(12000), Validators.min(20),Validators.pattern(/^\d+(kg|KG|Kg)$/)]],
     });
   }
 
@@ -86,7 +98,10 @@ export class EditarVComponent implements OnInit {
     //console.log(`id: ${this.datosVehiculo.idVehiculo}`);
     this.vehiculoService.editarVehiculo(this.datosVehiculo).subscribe(data =>{
       console.log(data);
-      this.openSnackBar("Vehiculo editado correctamente");  
+      this.openSnackBar("Vehiculo editado correctamente");
+      this.vehiculoService.paginaR = true;
+      this.vehiculoService.paginaReactiva.next(true); 
+      this.router.navigate(['/vehiculo']);
     }, err => {
       
       this.openSnackBar(err.error.message)    

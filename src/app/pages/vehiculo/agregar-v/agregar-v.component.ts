@@ -70,9 +70,9 @@ export class AgregarVComponent implements OnInit {
     
     this.form = this.formBuilder.group({
       
-      placa: [this.datosVehiculo.placa, [Validators.required,Validators.maxLength(7), Validators.minLength(7),Validators.pattern(/[a-zA-Z ]{3}[-]\d{3}/)]],
-      modelo: [this.datosVehiculo.modelo, [Validators.required,Validators.min(1998), Validators.max(2022)]],
-      marca: [this.datosVehiculo.marca, [Validators.required]],
+      placa: [this.datosVehiculo.placa, [Validators.required,Validators.maxLength(7), Validators.minLength(7),Validators.pattern(/[A-Z ]{3}[-]\d{3}/)]],
+      modelo: [this.datosVehiculo.modelo, [Validators.required,Validators.min(1998), Validators.max(2022), Validators.pattern(/^[0-9]\d+$/)]],
+      marca: [this.datosVehiculo.marca, [Validators.required, Validators.minLength(3)]],
       tipoVehiuclo: [this.datosVehiculo.tipoVehiuclo, [Validators.required]],
       capacidad: [this.datosVehiculo.capacidad, [Validators.required, Validators.max(12000), Validators.min(20),Validators.pattern(/^\d+(kg|KG|Kg)$/)]],
     });
@@ -87,7 +87,9 @@ export class AgregarVComponent implements OnInit {
      this.vehiculoService.guardarVehiculo(this.datosVehiculo).subscribe(data =>{
       console.log(data);
       this.openSnackBar("Vehiculo guardado correctamente");
+      this.vehiculoService.paginaReactiva.next(true); 
       this.router.navigate(['/vehiculo']);
+      
     }, err => {
       
       this.openSnackBar(err.error.message)    

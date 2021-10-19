@@ -1,18 +1,19 @@
 .formularioI{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    width: 60%;
-    margin: 2% auto;
-    height: auto;
+    width: 90%;
+    margin: 0.5% auto;
+    height: 100%;
 }
 .tamano{
     width:300px;
-    height:100px;
+    height:90px;
+    position: absolute;
 }
 
 .formu{
     width: 80px;
-    height:30px;
+    height:20px;
     font-size: medium;
 }
 
@@ -23,5 +24,21 @@
 }
 
 .centro{
-    margin: 2% auto;
+    margin: 0.5% auto;
+}
+
+.titulo{
+    position: relative;
+    font-size: 56px;
+    font-style: inherit;
+    text-align: center;
+    margin-top: 25px;
+    font: italic bold 56px Georgia, Serif;
+    text-shadow: -4px 3px 0 #34d16e, -14px 7px 0 #0a0e27;
+}
+
+.prueba{
+    width: 10px;
+    height: 105px;
+    margin-left: 30%;
 }

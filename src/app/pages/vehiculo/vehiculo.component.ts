@@ -32,17 +32,34 @@ export class VehiculoComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageIndex = 0;
 
+  pageR: boolean;
+  public flagPagina: boolean = true;
+
   @ViewChild('PVehiculo') VehiculoPaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private vehiculoService: VehiculoService,
               private _snackBar: MatSnackBar,
               public route: ActivatedRoute,
-              private progressService: ProgressService) { }
+              private progressService: ProgressService) {
+                
+
+
+               }
 
   async ngOnInit(): Promise<void> {
+    this.inicio();
+    this.vehiculoService.paginaReactiva.subscribe(data=>{
+      this.listarV(this.pageEvent);
+    });
+    
+  }
+
+  async inicio(){
+    //this.pageR = this.vehiculoService.paginaReactiva;
     this.progressService.progressBarReactiva.next(false);
     await new Promise(f => setTimeout(f,1500));
+    
     this.vehiculoService.listarVehiculo(0, this.pageSize).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
@@ -51,10 +68,10 @@ export class VehiculoComponent implements OnInit {
       this.totalElement = data.totalElements;
       this.dataSource.sort = this.sort;
       this.progressService.progressBarReactiva.next(true);
-      console.log(`PaginasTotales: ${this.totalPages} - Act: ${this.pageIndex}`);
+      //console.log(`PaginasTotales: ${this.totalPages} - Act: ${this.pageIndex}`);
+      
     });
   }
-
   // MatPaginator Output
   pageEvent: PageEvent;
 
@@ -75,7 +92,7 @@ export class VehiculoComponent implements OnInit {
       this.length = data.totalElements;
       //this.index = this.pageEvent.pageIndex;
       this.totalElement = data.totalElements;
-      console.log(`PaginasTotales: ${this.totalPages} - Act: ${pageI}`);
+      //console.log(`PaginasTotales: ${this.totalPages} - Act: ${pageI}`);
       //this.progressService.progressBarReactiva.next(true);
     });
   }

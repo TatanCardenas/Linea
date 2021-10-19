@@ -1,10 +1,12 @@
 <button mat-fab color="accent" style="float: left; margin-left: 10px;" [routerLink]="['/vehiculo']">
   <mat-icon>arrow_back</mat-icon>
 </button>
-<title fontSize="long" margin="center">Añadir Vehiculo</title>
+<p class="titulo">AÑADIR VEHICULO </p>
+
 <form [formGroup]="form" class="form-inline">
   <div class="formularioI">
-    <div>
+    
+    <div class="prueba">
       <mat-form-field appearance="outline" class="tamano">
         <mat-label>PLACA</mat-label>
         <input matInput placeholder="AAA-111" formControlName="placa" class="formu">       
@@ -24,7 +26,7 @@
         </mat-hint>
       </mat-form-field>
     </div>
-    <div>
+    <div class="prueba">
       <mat-form-field appearance="outline" class="tamano">
         <mat-label>MODELO</mat-label>
         <input matInput placeholder="Ej: 2020" formControlName="modelo" class="formu">
@@ -33,7 +35,7 @@
             Se requiere este campo
           </p>
           <p *ngIf="form.get('modelo').hasError('max')">
-            El modelo no puede ser superior al año 2022
+            El modelo no deberia ser superior al año 2022
           </p>
           <p *ngIf="form.get('modelo').hasError('min')">
             El modelo no puede ser inferior al año 1998
@@ -43,49 +45,59 @@
       </mat-form-field>
     </div>
 
-    <div>
-      <mat-form-field appearance="fill">
+    <div class="prueba">
+      <mat-form-field appearance="fill" class="tamano">
         <mat-label>MARCA</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="car" formControlName="marca">
+        <mat-select [(ngModel)]="selectedCar" name="car" formControlName="marca">
           <mat-option *ngFor="let car of cars" [value]="car.value">
             {{car.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-hint *ngIf="form.get('marca').errors && form.get('marca')">
+          <p *ngIf="form.get('marca').hasError('required')">
+            Seleccione una marca
+          </p>
+          <p *ngIf="form.get('marca').hasError('min')">
+            Seleccione una marca
+          </p>
+        </mat-hint>
       </mat-form-field>
     </div>
-    <div>
-      <mat-form-field appearance="fill">
+    <div class="prueba">
+      <mat-form-field appearance="fill" class="tamano">
         <mat-label>TIPO VEHICULO</mat-label>
         <mat-select [(ngModel)]="selectedValue" name="car" formControlName="tipoVehiuclo">
           <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
             {{tipo.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-hint *ngIf="form.get('tipoVehiuclo').errors && form.get('tipoVehiuclo')">
+          <p *ngIf="form.get('tipoVehiuclo').hasError('required')">
+            Seleccione una tipo de vehiculo
+          </p>
+        </mat-hint>
       </mat-form-field>
     </div>
-    <div>
+    <div class="prueba">
       <mat-form-field appearance="outline" class="tamano">
         <mat-label>CAPACIDAD</mat-label>
         <input matInput placeholder="Ej: 70kg" formControlName="capacidad" class="formu">
-        <mat-hint *ngIf="form.get('capacidad').errors && form.get('placa').touched">
+        <mat-hint *ngIf="form.get('capacidad').errors && form.get('capacidad').touched">
           <p *ngIf="form.get('capacidad').hasError('required')">
             Se requiere este campo
           </p>
-          <p *ngIf="form.get('capacidad').hasError('maxlength')">
-            La placa no puede tener mas de 7 caracteres
-          </p>
           <p *ngIf="form.get('capacidad').hasError('min')">
-            La placa no puede ser menor de 20Kg
+            La capacidad no puede ser menor de 20Kg
           </p>
           <p *ngIf="form.get('capacidad').hasError('pattern')">
-            
+            *Formato Ej: 70KG     
           </p>
         </mat-hint>
       </mat-form-field>
     </div>
     <div class="centro">
       <button mat-raised-button [disabled]="form.invalid" color="primary"
-        style="float: left; margin-left: 35px; margin-top: 10px;" class="boton" type="submit"
+        style="float: left; margin-left: 20px; margin-top: 20px;" class="boton" type="submit"
         (click)="guardarv($event)">Añadir
         <mat-icon>bookmark</mat-icon>
       </button>
