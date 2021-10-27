@@ -22,7 +22,14 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ErrorInterceptorService } from './_share/error-interceptor.service';
 import { PageErrorComponent } from './pages/page-error/page-error.component';
 import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
+import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.component';
+import { environment } from 'src/environments/environment';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  let tk = sessionStorage.getItem(environment.TOKEN);
+  return tk != null ? tk : '';
+}
 
 @NgModule({
   declarations: [
@@ -38,6 +45,7 @@ import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
     NotFoundComponent,
     PageErrorComponent,
     EditarVComponent,
+    NoAutorizadoComponent,
     
   ],
   imports: [
@@ -46,7 +54,13 @@ import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['159.223.107.103:8080'],
+        disallowedRoutes: ['http://159.223.107.103:8080/movitapp-backend/oauth/token'],
+      },
+    }),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
