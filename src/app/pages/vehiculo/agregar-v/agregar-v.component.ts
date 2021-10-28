@@ -6,6 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/_service/vehiculo.service';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RecargarService } from 'src/app/_service/recargar.service';
 
 interface Car {
   value: string;
@@ -58,6 +59,7 @@ export class AgregarVComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private recargarService: RecargarService
   ) {
     
   }
@@ -87,7 +89,7 @@ export class AgregarVComponent implements OnInit {
      this.vehiculoService.guardarVehiculo(this.datosVehiculo).subscribe(data =>{
       console.log(data);
       this.openSnackBar("Vehiculo guardado correctamente");
-      this.vehiculoService.paginaReactiva.next(true); 
+      this.recargarService.paginaReactiva.next(true); 
       this.router.navigate(['/vehiculo']);
       
     }, err => {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Vehiculo } from 'src/app/_model/Vehiculo';
+import { RecargarService } from 'src/app/_service/recargar.service';
 import { VehiculoService } from 'src/app/_service/vehiculo.service';
 
 interface Car {
@@ -53,7 +54,9 @@ export class EditarVComponent implements OnInit {
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private recargarService: RecargarService
+    ) {
 
       this.route.params.subscribe((params: Params) => {        //Obtener parametros que estan en le url
         this.idVehiculo = params['idV'];
@@ -100,7 +103,7 @@ export class EditarVComponent implements OnInit {
       console.log(data);
       this.openSnackBar("Vehiculo editado correctamente");
       this.vehiculoService.paginaR = true;
-      this.vehiculoService.paginaReactiva.next(true); 
+      this.recargarService.paginaReactiva.next(true);
       this.router.navigate(['/vehiculo']);
     }, err => {
       

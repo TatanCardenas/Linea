@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProgressService } from 'src/app/_service/progress.service';
 import { LoginService } from './_service/login.service';
 import { VehiculoService } from './_service/vehiculo.service';
+import { RecargarService } from './_service/recargar.service'
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,11 @@ export class AppComponent implements OnInit{
   public flagSesion: boolean = false;
   constructor(private progressService: ProgressService,
               private loginService: LoginService,
-              private vehiculoService: VehiculoService){
-                this.vehiculoService.recargarPagina;
+              private recargarService: RecargarService){
                 this.logeo();
+                this.recargarService.paginaReactiva.subscribe(data=>{
+                  this.logeo();
+                });
                 
   }
 
@@ -30,6 +33,7 @@ export class AppComponent implements OnInit{
 
   logeo(){
     this.flagSesion = this.loginService.estaLogueado();
+
     console.log(this.flagSesion);
   }
 

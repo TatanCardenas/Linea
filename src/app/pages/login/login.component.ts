@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { JwtHelperService } from "@auth0/angular-jwt";  
 import { Router } from '@angular/router';
 import { VehiculoService } from 'src/app/_service/vehiculo.service';
+import { RecargarService } from 'src/app/_service/recargar.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit {
               private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
               private router: Router,
-              private vehiculoService: VehiculoService) { }
+              private vehiculoService: VehiculoService,
+              private recargarService: RecargarService
+              ) { }
 
   ngOnInit(): void {
     this.buildFrom();
@@ -57,7 +60,7 @@ export class LoginComponent implements OnInit {
         console.log(decodedToken);*/
 
       sessionStorage.setItem(environment.TOKEN, data.access_token);
-      this.vehiculoService.paginaReactiva.next(true);
+      this.recargarService.paginaReactiva.next(true);
       this.router.navigate(['']);
     }, err => {
       
