@@ -32,6 +32,9 @@ export class ErrorInterceptorService implements HttpInterceptor {
         console.log(err);
         console.log("err.error");
         console.log(err.error);
+
+        this.progressService.progressBarReactiva.next(true);
+
         if (err.error.status == 400) {
           if (err.error.message[0] == '-') {
             this.openSnackBar(err.error.message.slice(4));

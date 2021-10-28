@@ -104,6 +104,7 @@ export class EditarVComponent implements OnInit {
       this.openSnackBar("Vehiculo editado correctamente");
       this.vehiculoService.paginaR = true;
       this.recargarService.paginaReactiva.next(true);
+      this.vehiculoService.paginaReactiva.next(true);
       this.router.navigate(['/vehiculo']);
     }, err => {
       

@@ -39,26 +39,23 @@ export class VehiculoComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private vehiculoService: VehiculoService,
-              private _snackBar: MatSnackBar,
-              public route: ActivatedRoute,
-              private progressService: ProgressService) {
-              }
+    private _snackBar: MatSnackBar,
+    public route: ActivatedRoute,
+    private progressService: ProgressService) {
+  }
 
   async ngOnInit(): Promise<void> {
     /*this.progressService.progressBarReactiva.next(false);
     await new Promise(f => setTimeout(f,1500));*/
     this.inicio();
-    this.vehiculoService.paginaReactiva.subscribe(data=>{
+    this.vehiculoService.paginaReactiva.subscribe(data => {
       this.inicio();
-    }); 
+    });
   }
 
-  async inicio(){
-    //this.pageR = this.vehiculoService.paginaReactiva;
-    
-    
+  async inicio() {
     this.vehiculoService.listarVehiculo(this.pageIndex, this.pageSize).subscribe(data => {
-      (this.dataSource.data = data.content) 
+      (this.dataSource.data = data.content)
       this.length = data.totalElements;
       this.dataSource.sort = this.sort;
       this.progressService.progressBarReactiva.next(true);
@@ -73,24 +70,24 @@ export class VehiculoComponent implements OnInit {
     }
   }
 
-  public async listarV(eve: any): Promise<void>{
+  /*public async listarV(eve: any): Promise<void> {
     this.pageIndex = eve.pageIndex;
     let pageS = eve.pageSize;
-    this.vehiculoService.listarVehiculo(this.pageIndex,pageS).subscribe(data => {
+    this.vehiculoService.listarVehiculo(this.pageIndex, pageS).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
       this.length = data.totalElements;
       this.pageIndex = eve.pageIndex;
       this.totalElement = data.totalElements;
     });
-  }
+  }*/
 
-  public cambioPagina(ev: any){
+  public cambioPagina(ev: any) {
     this.pageSize = ev.pageSize;
     this.pageIndex = ev.pageIndex;
     this.length = ev.length;
     this.inicio();
-    
+
   }
 
   private delay(ms: number) {
