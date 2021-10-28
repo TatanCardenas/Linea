@@ -6,6 +6,8 @@ import { Usuario } from '../../_model/Usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from "@auth0/angular-jwt";  
+import { Router } from '@angular/router';
+import { VehiculoService } from 'src/app/_service/vehiculo.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,9 @@ export class LoginComponent implements OnInit {
   private usuarioL = new Usuario;
   constructor(private loginService: LoginService,
               private formBuilder: FormBuilder,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private vehiculoService: VehiculoService) { }
 
   ngOnInit(): void {
     this.buildFrom();
@@ -53,6 +57,8 @@ export class LoginComponent implements OnInit {
         console.log(decodedToken);*/
 
       sessionStorage.setItem(environment.TOKEN, data.access_token);
+      this.vehiculoService.paginaReactiva.next(true);
+      this.router.navigate(['']);
     }, err => {
       
       this.openSnackBar(err.error.message)    

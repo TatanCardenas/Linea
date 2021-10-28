@@ -45,22 +45,21 @@ export class VehiculoComponent implements OnInit {
               }
 
   async ngOnInit(): Promise<void> {
+    /*this.progressService.progressBarReactiva.next(false);
+    await new Promise(f => setTimeout(f,1500));*/
     this.inicio();
     this.vehiculoService.paginaReactiva.subscribe(data=>{
-      this.listarV(this.pageEvent);
-    });  
+      this.inicio();
+    }); 
   }
 
   async inicio(){
     //this.pageR = this.vehiculoService.paginaReactiva;
-    this.progressService.progressBarReactiva.next(false);
-    await new Promise(f => setTimeout(f,1500));
     
-    this.vehiculoService.listarVehiculo(0, this.pageSize).subscribe(data => {
-      (this.dataSource.data = data.content)
-      this.totalPages = data.totalPages;
+    
+    this.vehiculoService.listarVehiculo(this.pageIndex, this.pageSize).subscribe(data => {
+      (this.dataSource.data = data.content) 
       this.length = data.totalElements;
-      this.totalElement = data.totalElements;
       this.dataSource.sort = this.sort;
       this.progressService.progressBarReactiva.next(true);
     });
@@ -74,16 +73,24 @@ export class VehiculoComponent implements OnInit {
     }
   }
 
-  public async listarV(pageEvent): Promise<void>{
-    let pageI = this.pageEvent.pageIndex;
-    let pageS = this.pageEvent.pageSize;
-    this.vehiculoService.listarVehiculo(pageI,pageS).subscribe(data => {
+  public async listarV(eve: any): Promise<void>{
+    this.pageIndex = eve.pageIndex;
+    let pageS = eve.pageSize;
+    this.vehiculoService.listarVehiculo(this.pageIndex,pageS).subscribe(data => {
       (this.dataSource.data = data.content)
       this.totalPages = data.totalPages;
       this.length = data.totalElements;
-      //this.index = this.pageEvent.pageIndex;
+      this.pageIndex = eve.pageIndex;
       this.totalElement = data.totalElements;
     });
+  }
+
+  public cambioPagina(ev: any){
+    this.pageSize = ev.pageSize;
+    this.pageIndex = ev.pageIndex;
+    this.length = ev.length;
+    this.inicio();
+    
   }
 
   private delay(ms: number) {

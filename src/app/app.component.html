@@ -11,7 +11,7 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button [disabled]="!flagSesion" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
 
@@ -20,7 +20,7 @@
         <mat-icon>account_box</mat-icon>
         <span>Mi Perfil</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="cerrarSession()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Cerrar Sesión</span>
       </button>
@@ -31,32 +31,32 @@
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
+      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
         <mat-icon>search</mat-icon>
         <span>DepartamentoP</span>
 
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/login']">
+      <button mat-menu-item [disabled]="flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/login']">
         <mat-icon>manage accounts</mat-icon>
         <span>Ingresar</span>
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/editar']">
+      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/editar']">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/departamento']">
+      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/departamento']">
         <mat-icon>room</mat-icon>
         <span>Departamentos</span>
       </button>
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/vehiculo']">
+      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/vehiculo']">
         <mat-icon>local_shipping</mat-icon>
         <span>Vehiculos</span>
       </button>

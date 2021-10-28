@@ -15,8 +15,8 @@ export class VehiculoService {
   
   constructor(private http: HttpClient) { }
 
-  public recargarPagina(recargar: boolean){
-    if(recargar == true ){
+  public recargarPagina(paginaReactiva: boolean){
+    if(paginaReactiva == true ){
       return window.location.reload();
     }else{
       return EMPTY;

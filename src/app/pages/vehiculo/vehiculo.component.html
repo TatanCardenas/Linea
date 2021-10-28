@@ -54,7 +54,7 @@
     </table>
 
     <mat-paginator [hidden]="route.children.length !== 0" class="paginator" [length]="length" [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; listarV(pageEvent.pageIndex)">
+        [pageSizeOptions]="pageSizeOptions" (page)="cambioPagina($event)">
     </mat-paginator>
 
 </div>
