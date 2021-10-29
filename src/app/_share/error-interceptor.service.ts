@@ -45,12 +45,14 @@ export class ErrorInterceptorService implements HttpInterceptor {
             this.openSnackBar("Ocurrio un error, intente mas tarde")
           }
 
-        } else if (err.status == 401) {
-          if(err.error.error_description[0] == '-'){
-            this.openSnackBar(err.error.error_description.slice(4));
-          }/*else if(err.error.message == "No estas autorizado para acceder a este recurso"){
+        } else if (err.error.error == '401') {
+          if(err.error.exception == 'No autorizado'){
             this.openSnackBar(err.error.message);
-          }*/
+            this.router.navigate(['/sinacceso']);
+          }else if(err.error.message == "No estas autorizado para acceder a este recurso"){
+            this.openSnackBar(err.error.message);
+            this.router.navigate(['/sinacceso']);
+          }
           
           else{
             this.router.navigate(['/sinacceso']);
@@ -61,9 +63,17 @@ export class ErrorInterceptorService implements HttpInterceptor {
             this.openSnackBar("Usuario o contraseña incorrecto");
           }
           //this.openSnackBar(err.error.message);
+
+          //revisar bien esto
         }else if (err.error.status == 401) {
           this.router.navigate(['/sinaccesos']);
           //this.openSnackBar(err.error.message);
+        }else if (err.status == 401) {
+          if(err.error.error == 'unauthorized'){
+            this.openSnackBar(err.error.error_description.slice(4));
+          }
+          //this.router.navigate(['/sinaccesos']);
+          
         } else if (err.error.status == 404) {
           this.router.navigate(['/error']);
           //this.openSnackBar(err.error.message);

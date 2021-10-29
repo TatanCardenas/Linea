@@ -45,8 +45,8 @@ export class VehiculoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    /*this.progressService.progressBarReactiva.next(false);
-    await new Promise(f => setTimeout(f,1500));*/
+    this.progressService.progressBarReactiva.next(false);
+    await new Promise(f => setTimeout(f,1500));
     this.inicio();
     this.vehiculoService.paginaReactiva.subscribe(data => {
       this.inicio();

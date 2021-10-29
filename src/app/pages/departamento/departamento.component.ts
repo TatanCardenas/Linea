@@ -41,7 +41,7 @@ export class DepartamentoComponent implements OnInit {
     
     this.progressService.progressBarReactiva.next(false);
     //this.mostrarBarra = true;
-    await new Promise(f => setTimeout(f,3000));
+    await new Promise(f => setTimeout(f,1500));
     this.departamentoService.listar().subscribe(async data =>{
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator
