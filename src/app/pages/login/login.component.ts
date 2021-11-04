@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
   formul: FormGroup;
   hide = true;
   private usuarioL = new Usuario;
+  mensajeError: string ='';
+
   constructor(private loginService: LoginService,
               private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,

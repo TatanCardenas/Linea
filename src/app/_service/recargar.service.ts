@@ -11,12 +11,12 @@ export class RecargarService {
   
   constructor(private http: HttpClient) { }
 
-  public recargarPagina(paginaReactiva: boolean){
+  /*public recargarPagina(paginaReactiva: boolean){
     if(paginaReactiva == true ){
       return window.location.reload();
     }else{
       return EMPTY;
     }
-  }
+  }*/
   
 }

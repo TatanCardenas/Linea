@@ -9,9 +9,11 @@ import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.compo
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PageErrorComponent } from './pages/page-error/page-error.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.component';
 import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
+import { GuardianService } from './_share/guardian.service'
 
 
 const routes: Routes = [
@@ -19,14 +21,15 @@ const routes: Routes = [
   {path: 'buscar', component: BuscarComponent},
   {path: 'ingresar', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'editar', component: EditarComponent},
+  {path: 'editar', component: EditarComponent, canActivate: [GuardianService]},
   {path: 'departamento', component: DepartamentoComponent, children:[
-    {path: 'ciudad/:idDep', component: CiudadComponent}
-  ]},
+    {path: 'ciudad/:idDep', component: CiudadComponent, canActivate: [GuardianService]}
+  ], canActivate: [GuardianService]},
   {path: 'vehiculo', component: VehiculoComponent, children:[
     {path: 'datosv/:idV', component: EditarVComponent},
-    {path: 'agregar', component: AgregarVComponent}
-  ]},
+    {path: 'agregar', component: AgregarVComponent},
+  ], canActivate: [GuardianService]},
+  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService]},
   {path: 'error', component: PageErrorComponent},
   {path: 'sinacceso', component: NoAutorizadoComponent},
   {path: '**', component: NotFoundComponent}

@@ -10,7 +10,9 @@
   }
 
   .titulo {
-    font-style: italic ;
+    font-family: 'Jost', sans-serif;
+    word-wrap: break-word;
+    text-transform: uppercase;
     font-size: xx-large;
     text-align: center;
     margin: 20px;

@@ -25,6 +25,7 @@ import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
 import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.component';
 import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -46,6 +47,7 @@ export function tokenGetter() {
     PageErrorComponent,
     EditarVComponent,
     NoAutorizadoComponent,
+    UsuarioComponent,
     
   ],
   imports: [

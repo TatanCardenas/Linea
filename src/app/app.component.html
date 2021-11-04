@@ -10,10 +10,11 @@
     <h1 class="example-app-name">ENVIOS UDEC</h1>
 
     <span class="example-spacer"></span>
-
-    <button [disabled]="!flagSesion" mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
+    <div [hidden]="!flagSesion">
+      <button [disabled]="!flagSesion" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/perfil">
@@ -31,36 +32,67 @@
   <mat-drawer-container class="example-sidenav-content" autosize>
     <mat-drawer #drawer style="width: 200px" mode="side">
 
-      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/buscar']">
-        <mat-icon>search</mat-icon>
-        <span>DepartamentoP</span>
+      <div [hidden]="flagSesion">
+        <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/login']">
+          <mat-icon>manage accounts</mat-icon>
+          <span>Ingresar</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
-      </button>
-      <mat-divider></mat-divider>
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/buscar']">
+          <mat-icon>search</mat-icon>
+          <span>DepartamentoP</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
-      <button mat-menu-item [disabled]="flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/login']">
-        <mat-icon>manage accounts</mat-icon>
-        <span>Ingresar</span>
-      </button>
-      <mat-divider></mat-divider>
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/editar']">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
-      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/editar']">
-        <mat-icon>edit</mat-icon>
-        <span>Editar</span>
-      </button>
-      <mat-divider></mat-divider>
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/departamento']">
+          <mat-icon>room</mat-icon>
+          <span>Departamentos</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
-      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/departamento']">
-        <mat-icon>room</mat-icon>
-        <span>Departamentos</span>
-      </button>
-      <mat-divider></mat-divider>
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/vehiculo']">
+          <mat-icon>local_shipping</mat-icon>
+          <span>Vehiculos</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
-      <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer" [routerLink]="['/vehiculo']">
-        <mat-icon>local_shipping</mat-icon>
-        <span>Vehiculos</span>
-      </button>
-      <mat-divider></mat-divider>
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/vehiculo']">
+          <mat-icon>local_shipping</mat-icon>
+          <span>Vehi</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div [hidden]="!flagSesion">
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/usuario']">
+          <mat-icon>person_add</mat-icon>
+          <span>Usuario</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
     </mat-drawer>
 
