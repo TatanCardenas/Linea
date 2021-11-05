@@ -26,6 +26,7 @@ import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.compo
 import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { BnNgIdleService } from 'bn-ng-idle'
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -65,6 +66,7 @@ export function tokenGetter() {
     }),
   ],
   providers: [
+    [BnNgIdleService],
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

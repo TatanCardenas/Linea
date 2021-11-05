@@ -78,15 +78,6 @@
 
       <div [hidden]="!flagSesion">
         <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
-          [routerLink]="['/vehiculo']">
-          <mat-icon>local_shipping</mat-icon>
-          <span>Vehi</span>
-        </button>
-        <mat-divider></mat-divider>
-      </div>
-
-      <div [hidden]="!flagSesion">
-        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
           [routerLink]="['/usuario']">
           <mat-icon>person_add</mat-icon>
           <span>Usuario</span>
