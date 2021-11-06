@@ -26,7 +26,8 @@ import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.compo
 import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
-import { BnNgIdleService } from 'bn-ng-idle'
+import { BnNgIdleService } from 'bn-ng-idle';
+import { AgregrarUComponent } from './pages/usuario/agregrar-u/agregrar-u.component'
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -49,6 +50,7 @@ export function tokenGetter() {
     EditarVComponent,
     NoAutorizadoComponent,
     UsuarioComponent,
+    AgregrarUComponent,
     
   ],
   imports: [

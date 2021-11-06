@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       //this.logeo();
     });
 
-    this.bnIdle.startWatching(5).subscribe((isTimedOut: boolean) => {
+    this.bnIdle.startWatching(900).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         if(this.loginService.estaLogueado()==true){
           alert("Tiempo expirado");

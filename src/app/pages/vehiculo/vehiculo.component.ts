@@ -56,6 +56,7 @@ export class VehiculoComponent implements OnInit {
   async inicio() {
     this.vehiculoService.listarVehiculo(this.pageIndex, this.pageSize).subscribe(data => {
       (this.dataSource.data = data.content)
+      //console.log("v: "+this.dataSource.data);
       this.length = data.totalElements;
       this.dataSource.sort = this.sort;
       this.progressService.progressBarReactiva.next(true);

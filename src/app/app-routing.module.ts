@@ -27,7 +27,7 @@ const routes: Routes = [
   ], canActivate: [GuardianService]},
   {path: 'vehiculo', component: VehiculoComponent, children:[
     {path: 'datosv/:idV', component: EditarVComponent},
-    {path: 'agregar', component: AgregarVComponent},
+    {path: 'agregarv', component: AgregarVComponent},
   ], canActivate: [GuardianService]},
   {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService]},
   {path: 'error', component: PageErrorComponent},

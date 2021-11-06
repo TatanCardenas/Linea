@@ -14,7 +14,7 @@ export class GuardianService implements CanActivate {
     private router: Router,) { }
   public flagInactividad: boolean = false;
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log("Entro al guradian");
+    console.log("Entro al guardian");
 
     if (this.loginService.estaLogueado() == true) {
       //return true;
