@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PageErrorComponent } from './pages/page-error/page-error.component';
+import { PagosComponent } from './pages/pagos/pagos.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { RutasComponent } from './pages/rutas/rutas.component';
 import { AgregarUComponent } from './pages/usuario/agregar-u/agregar-u.component';
@@ -21,7 +22,7 @@ import { GuardianService } from './_share/guardian.service'
 
 const routes: Routes = [
   {path: '', component: EditarComponent},
-  {path: 'buscar', component: BuscarComponent},
+  {path: 'buscar', component: BuscarComponent, canActivate: [GuardianService]},
   {path: 'ingresar', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
   {path: 'editar', component: EditarComponent, canActivate: [GuardianService]},
@@ -36,7 +37,8 @@ const routes: Routes = [
     {path: 'datosc/:idConductor', component: EditarUComponent},
     {path: 'agregarc', component: AgregarUComponent},
   ], canActivate: [GuardianService]},
-  {path: 'ruta', component: RutasComponent},
+  {path: 'ruta', component: RutasComponent, canActivate: [GuardianService]},
+  {path: 'pagos', component: PagosComponent, canActivate: [GuardianService]},
   {path: 'error', component: PageErrorComponent},
   {path: 'sinacceso', component: NoAutorizadoComponent},
   {path: '**', component: NotFoundComponent}

@@ -1,3 +1,3 @@
 export class Documento {
-    idTipoDocumento: 1;
+    idTipoDocumento: number = 1;
 }

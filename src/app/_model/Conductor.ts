@@ -8,6 +8,7 @@ export class Conductor {
     nombre: String;
     apellido: String;
     nick: String;
+    clave: String;
     direccion: String;
     celular: String;
     celularAux: String;

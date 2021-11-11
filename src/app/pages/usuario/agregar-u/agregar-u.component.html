@@ -29,7 +29,7 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>APELLIDO</mat-label>
-                <input matInput placeholder="Ej: 2020" formControlName="apellido" class="formu">
+                <input matInput placeholder="Lopez Hernandez" formControlName="apellido" class="formu">
                 <mat-hint *ngIf="form.get('apellido').errors && form.get('apellido').touched">
                     <p *ngIf="form.get('apellido').hasError('required')">
                         Se requiere este campo
@@ -40,7 +40,24 @@
                     <p *ngIf="form.get('apellido').hasError('min')">
                         El modelo no puede ser inferior al año 1998
                     </p>
+                </mat-hint>
+            </mat-form-field>
+        </div>
 
+        <div class="prueba">
+            <mat-form-field appearance="outline" class="tamano">
+                <mat-label>DOCUMENTO</mat-label>
+                <input matInput placeholder="1028376102" formControlName="documento" class="formu">
+                <mat-hint *ngIf="form.get('documento').errors && form.get('documento').touched">
+                    <p *ngIf="form.get('documento').hasError('required')">
+                        Se requiere este campo
+                    </p>
+                    <p *ngIf="form.get('documento').hasError('minlength')">
+                        Documento debe tener minimo 5 digitos
+                    </p>
+                    <p *ngIf="form.get('documento').hasError('maxlength')">
+                        Documento debe tener maximo 12 digitos
+                    </p>
                 </mat-hint>
             </mat-form-field>
         </div>
@@ -48,16 +65,16 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>CELULAR</mat-label>
-                <input matInput placeholder="Ej: 70kg" formControlName="celular" class="formu">
+                <input matInput placeholder="321*******" formControlName="celular" class="formu">
                 <mat-hint *ngIf="form.get('celular').errors && form.get('celular').touched">
                     <p *ngIf="form.get('celular').hasError('required')">
                         Se requiere este campo
                     </p>
-                    <p *ngIf="form.get('celular').hasError('min')">
-                        La capacidad no puede ser menor de 20Kg
+                    <p *ngIf="form.get('celular').hasError('minlength')">
+                        Numero de celular invalido
                     </p>
-                    <p *ngIf="form.get('celular').hasError('pattern')">
-                        *Formato incorrecto
+                    <p *ngIf="form.get('celular').hasError('maxlength')">
+                        *Numero de celular invalido
                     </p>
                 </mat-hint>
             </mat-form-field>
@@ -66,16 +83,71 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>CELULAR AUX</mat-label>
-                <input matInput placeholder="Ej: 70kg" formControlName="celular" class="formu">
+                <input matInput placeholder="Ej: 70kg" formControlName="celularAux" class="formu">
                 <mat-hint *ngIf="form.get('celularAux').errors && form.get('celularAux').touched">
                     <p *ngIf="form.get('celularAux').hasError('required')">
                         Se requiere este campo
                     </p>
-                    <p *ngIf="form.get('celularAux').hasError('min')">
-                        La capacidad no puede ser menor de 20Kg
+                    <p *ngIf="form.get('celularAux').hasError('minlength')">
+                        *Numero de celular invalido
                     </p>
-                    <p *ngIf="form.get('celularAux').hasError('pattern')">
-                        *Formato incorrecto
+                    <p *ngIf="form.get('celularAux').hasError('maxlength')">
+                        *Numero de celular invalido
+                    </p>
+                </mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="prueba">
+            <mat-form-field appearance="outline" class="tamano">
+                <mat-label>USUARIO</mat-label>
+                <input matInput placeholder="Ej: 2020" formControlName="nick" class="formu">
+                <mat-hint *ngIf="form.get('nick').errors && form.get('nick').touched">
+                    <p *ngIf="form.get('nick').hasError('required')">
+                        Se requiere este campo
+                    </p>
+                    <p *ngIf="form.get('nick').hasError('maxlength')">
+                        Nombre de usario demasiado largo
+                    </p>
+                    <p *ngIf="form.get('nick').hasError('minlength')">
+                        Nombre de usario demasiado corto
+                    </p>
+                </mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="prueba">
+            <mat-form-field appearance="outline" class="tamano">
+                <mat-label>CONTRASEÑA</mat-label>
+                <input matInput placeholder="Contraseña" formControlName="clave" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint *ngIf="form.get('clave').errors && form.get('clave').touched">
+                    <p *ngIf="form.get('clave').hasError('required')">
+                        *Se requiere este campo
+                    </p>
+                    <p *ngIf="form.get('clave').hasError('minlength')">
+                        *Minimo 5 caracteres
+                    </p>
+                    <p *ngIf="form.get('clave').hasError('maxlength')">
+                        *Maximo 15 caracteres
+                    </p>
+                </mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="prueba">
+            <mat-form-field appearance="outline" class="tamano">
+                <mat-label>DIRECCION</mat-label>
+                <input matInput placeholder="Carrera 3a #1-1" formControlName="direccion" class="formu">
+                <mat-hint *ngIf="form.get('direccion').errors && form.get('direccion').touched">
+                    <p *ngIf="form.get('direccion').hasError('required')">
+                        Se requiere este campo
+                    </p>
+                    <p *ngIf="form.get('direccion').hasError('minlength')">
+                        Direccion invalida
                     </p>
                 </mat-hint>
             </mat-form-field>
@@ -111,12 +183,23 @@
             </mat-form-field>
         </div>
 
-
         <div class="prueba">
             <mat-form-field appearance="fill">
                 <mat-label>DEPARTAMENTO</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let pago of departamento" value="{{pago.idDepartamento}}">{{pago.nombre}}
+                    <mat-option (click)="selectD(dep.idDepartamento)" *ngFor="let dep of departamento"
+                        value="{{dep.idDepartamento}}">{{dep.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="prueba">
+            <mat-form-field appearance="fill">
+                <mat-label>CIUDAD</mat-label>
+                <mat-select formControlName="idCiudad">
+                    <mat-option (click)="select(ciudad)" *ngFor="let ciudad of idCity" value="{{ciudad.idCiudad}}">
+                        {{ciudad.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -125,7 +208,7 @@
         <div class="centro">
             <button mat-raised-button [disabled]="form.invalid" color="primary"
                 style="float: left; margin-left: 35px; margin-top: 10px;" class="boton" type="submit"
-                (click)="agregarConductor()">Editar
+                (click)="agregarConductor()">Agregrar Conductor
             </button>
         </div>
 

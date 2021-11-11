@@ -29,7 +29,8 @@ import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { EditarUComponent } from './pages/usuario/editar-u/editar-u.component';
 import { AgregarUComponent } from './pages/usuario/agregar-u/agregar-u.component';
-import { RutasComponent } from './pages/rutas/rutas.component'
+import { RutasComponent } from './pages/rutas/rutas.component';
+import { PagosComponent } from './pages/pagos/pagos.component'
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -55,6 +56,7 @@ export function tokenGetter() {
     EditarUComponent,
     AgregarUComponent,
     RutasComponent,
+    PagosComponent,
     
   ],
   imports: [

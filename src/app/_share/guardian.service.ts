@@ -14,7 +14,6 @@ export class GuardianService implements CanActivate {
     private router: Router) { }
   public flagInactividad: boolean = false;
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log("Entro al guardian");
 
     if (this.loginService.estaLogueado() == true) {
       //return true;
@@ -26,6 +25,7 @@ export class GuardianService implements CanActivate {
           const decodedToken = helper.decodeToken(token);
           const rol: string = decodedToken.authorities[0];
           const url: string = state.url;
+          
 
           if (url.includes('ingresar') && rol === 'Administrador')
             return true;
@@ -36,6 +36,10 @@ export class GuardianService implements CanActivate {
           else if (url.includes('vehiculo') && rol === 'Administrador')
             return true;
           else if (url.includes('usuario') && rol === 'Administrador')
+            return true;
+          else if (url.includes('ruta') && rol === 'Conductor')
+            return true;
+          else if (url.includes('pagos') && rol === 'Conductor')
             return true;
           else {
             this.router.navigate(['sinacceso']);

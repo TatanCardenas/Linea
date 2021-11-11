@@ -23,7 +23,7 @@ export class UsuarioComponent implements OnInit {
 
   // MatPaginator Inputs
   length: number;
-  pageSize = 1;
+  pageSize = 5;
   pageSizeOptions: number[] = [1, 5, 10, 25, 100];
   pageIndex = 0;
 

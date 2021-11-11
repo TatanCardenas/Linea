@@ -1,3 +1,3 @@
 export class Rol {
-    idRol: 4;
+    idRol: number = 4;
 }
