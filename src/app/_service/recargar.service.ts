@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class RecargarService {
 
   paginaReactiva= new Subject<boolean>();
+  rolUsuario= new Subject<string>();
   
   constructor(private http: HttpClient) { }
 

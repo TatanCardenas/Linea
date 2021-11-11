@@ -9,6 +9,9 @@ import { NoAutorizadoComponent } from './pages/no-autorizado/no-autorizado.compo
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PageErrorComponent } from './pages/page-error/page-error.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { RutasComponent } from './pages/rutas/rutas.component';
+import { AgregarUComponent } from './pages/usuario/agregar-u/agregar-u.component';
+import { EditarUComponent } from './pages/usuario/editar-u/editar-u.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { AgregarVComponent } from './pages/vehiculo/agregar-v/agregar-v.component';
 import { EditarVComponent } from './pages/vehiculo/editar-v/editar-v.component';
@@ -29,7 +32,11 @@ const routes: Routes = [
     {path: 'datosv/:idV', component: EditarVComponent},
     {path: 'agregarv', component: AgregarVComponent},
   ], canActivate: [GuardianService]},
-  {path: 'usuario', component: UsuarioComponent, canActivate: [GuardianService]},
+  {path: 'usuario', component: UsuarioComponent, children:[
+    {path: 'datosc/:idConductor', component: EditarUComponent},
+    {path: 'agregarc', component: AgregarUComponent},
+  ], canActivate: [GuardianService]},
+  {path: 'ruta', component: RutasComponent},
   {path: 'error', component: PageErrorComponent},
   {path: 'sinacceso', component: NoAutorizadoComponent},
   {path: '**', component: NotFoundComponent}

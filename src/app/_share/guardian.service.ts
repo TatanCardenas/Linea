@@ -11,7 +11,7 @@ import { LoginService } from '../_service/login.service';
 export class GuardianService implements CanActivate {
 
   constructor(private loginService: LoginService,
-    private router: Router,) { }
+    private router: Router) { }
   public flagInactividad: boolean = false;
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     console.log("Entro al guardian");

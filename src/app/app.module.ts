@@ -27,7 +27,9 @@ import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { AgregrarUComponent } from './pages/usuario/agregrar-u/agregrar-u.component'
+import { EditarUComponent } from './pages/usuario/editar-u/editar-u.component';
+import { AgregarUComponent } from './pages/usuario/agregar-u/agregar-u.component';
+import { RutasComponent } from './pages/rutas/rutas.component'
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -50,7 +52,9 @@ export function tokenGetter() {
     EditarVComponent,
     NoAutorizadoComponent,
     UsuarioComponent,
-    AgregrarUComponent,
+    EditarUComponent,
+    AgregarUComponent,
+    RutasComponent,
     
   ],
   imports: [

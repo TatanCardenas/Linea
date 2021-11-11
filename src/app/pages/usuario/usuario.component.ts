@@ -48,7 +48,7 @@ export class UsuarioComponent implements OnInit {
   async inicioU() {
     this.usuarioService.listarConductor(this.pageIndex, this.pageSize).subscribe(data => {
       this.dataSource.data = data.content;
-      console.log("Hola: " + data.content)
+      //console.log("Hola: " + data.content)
       this.length = data.totalElements;
       this.dataSource.sort = this.sort;
       this.progressService.progressBarReactiva.next(true);

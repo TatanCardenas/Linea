@@ -19,6 +19,13 @@ export class UsuarioService {
     return this.http.post(`${this.url}/guardar`,conductor);
   }
 
+  public editarConductor(conductor: Conductor){
+    return this.http.put(`${this.url}/editar`,conductor);
+  }
+
+  public conductorId(idUser: number){
+    return this.http.get<Conductor>(`${this.url}/listar/${idUser}`);
+  }
   /*public listarConductor(page: number, size: number){
     return this.http.get<ContenidoU>(`${this.url}/pageable?page=${page}&size=${size}`);
   }*/

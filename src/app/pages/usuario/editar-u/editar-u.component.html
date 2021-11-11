@@ -1,0 +1,76 @@
+
+  <p class="titulo">EDITAR CONDUCTOR </p>
+  <div>
+    <button mat-fab color="accent" style="float: left; margin-left: 10px;" [routerLink]="['/usuario']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="form" class="form-inline">
+    <div class="formularioI">
+      <div class="prueba">
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>NOMBRE</mat-label>
+          <input matInput placeholder="AAA-111" formControlName="nombre" class="formu">       
+          <mat-hint *ngIf="form.get('nombre').errors && form.get('nombre').touched">
+            <p *ngIf="form.get('nombre').hasError('required')">
+              Se requiere este campo
+            </p>
+            <p *ngIf="form.get('nombre').hasError('maxlength')">
+              La placa no puede tener mas de 7 caracteres
+            </p>
+            <p *ngIf="form.get('nombre').hasError('minlength')">
+              La placa no puede tener menos de 7 caracteres
+            </p>
+            <p *ngIf="form.get('nombre').hasError('pattern')">
+              *Formato de placa incorrecto
+            </p>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="prueba">
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>APELLIDO</mat-label>
+          <input matInput placeholder="Ej: 2020" formControlName="apellido" class="formu">
+          <mat-hint *ngIf="form.get('apellido').errors && form.get('apellido').touched">
+            <p *ngIf="form.get('apellido').hasError('required')">
+              Se requiere este campo
+            </p>
+            <p *ngIf="form.get('apellido').hasError('max')">
+              El modelo no deberia ser superior al año 2022
+            </p>
+            <p *ngIf="form.get('apellido').hasError('min')">
+              El modelo no puede ser inferior al año 1998
+            </p>
+            
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      
+      <div class="prueba">
+        <mat-form-field appearance="outline" class="tamano">
+          <mat-label>CELULAR</mat-label>
+          <input matInput placeholder="Ej: 70kg" formControlName="celular" class="formu">
+          <mat-hint *ngIf="form.get('celular').errors && form.get('celular').touched">
+            <p *ngIf="form.get('celular').hasError('required')">
+              Se requiere este campo
+            </p>
+            <p *ngIf="form.get('celular').hasError('min')">
+              La capacidad no puede ser menor de 20Kg
+            </p>
+            <p *ngIf="form.get('celular').hasError('pattern')">
+              *Formato incorrecto
+            </p>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="centro">
+        <button mat-raised-button [disabled]="form.invalid" color="primary"
+          style="float: left; margin-left: 35px; margin-top: 10px;" 
+          class="boton" type="submit" (click)="editarv($event)">Editar
+        </button>
+      </div>
+      
+    </div>
+  </form>
+
+  

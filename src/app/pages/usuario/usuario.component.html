@@ -5,7 +5,7 @@
             <mat-label>Filtro</mat-label>
             <input matInput class="margen" (keyup)="applyFilter($event)" placeholder="Filtrar" #input>
         </mat-form-field>
-        <button mat-raised-button class="button" color="accent" style="float: right;" [routerLink]="['agregar']">
+        <button mat-raised-button class="button" color="accent" style="float: right;" [routerLink]="['agregarc']">
             Añadir Conductor
         </button>
     </div> 
@@ -55,7 +55,7 @@
         <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef class="prueba"> Editar </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="accent" [routerLink]="['datosv/',element.idVehiculo]">
+                <button mat-raised-button color="accent" [routerLink]="['datosc/',element.idUsuario]">
                     <mat-icon>edit</mat-icon>
                 </button>
             </td>

@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RecargarService } from './recargar.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,8 @@ export class LoginService {
   private url: string = `${environment.HOST}/oauth/token`;
   constructor(private http: HttpClient,
               private router: Router,
-              private recargarService: RecargarService) { }
+              private recargarService: RecargarService,
+              private snackBar: MatSnackBar,) { }
 
   public login(usuario: string, password: string) {
 
@@ -28,6 +30,7 @@ export class LoginService {
     this.http.get(`${environment.HOST}/cerrarSesion/anular/${tk}`).subscribe(data => {
       sessionStorage.clear();
       this.recargarService.paginaReactiva.next(true);
+      this.openSnackBar("Cerrado correctamente");
       this.router.navigate(['login']);
     });
   }
@@ -35,5 +38,13 @@ export class LoginService {
   public estaLogueado(): boolean {
     const tk = sessionStorage.getItem(environment.TOKEN);
     return tk != null;
+  }
+
+  private openSnackBar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Información', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }

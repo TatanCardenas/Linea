@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     this.usuarioL = this.formul.value;
     this.usuario = this.usuarioL.user;
     this.password = this.usuarioL.pass
+    //console.log("Usuario: "+this.usuarioL.user);
      this.loginService.login(this.usuario,this.password).subscribe(data =>{
       console.log(data);
       this.openSnackBar("Login correcto");

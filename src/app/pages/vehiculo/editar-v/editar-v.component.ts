@@ -110,8 +110,6 @@ export class EditarVComponent implements OnInit {
       
       this.openSnackBar(err.error.message)    
     })
-
-
   }
 
   private openSnackBar(mensaje: string) {

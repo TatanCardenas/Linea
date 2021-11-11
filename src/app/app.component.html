@@ -80,7 +80,15 @@
         <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
           [routerLink]="['/usuario']">
           <mat-icon>person_add</mat-icon>
-          <span>Usuario</span>
+          <span>Conductores</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
+      <div *ngIf="rolSesion == 2" >
+        <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+          [routerLink]="['/usuario']">
+          <mat-icon>room</mat-icon>
+          <span>Rutas</span>
         </button>
         <mat-divider></mat-divider>
       </div>
