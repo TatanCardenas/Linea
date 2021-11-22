@@ -9,7 +9,7 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>NOMBRE</mat-label>
-                <input matInput placeholder="AAA-111" formControlName="nombre" class="formu">
+                <input matInput placeholder="Lucas Hernan" formControlName="nombre" class="formu">
                 <mat-hint *ngIf="form.get('nombre').errors && form.get('nombre').touched">
                     <p *ngIf="form.get('nombre').hasError('required')">
                         Se requiere este campo
@@ -35,10 +35,10 @@
                         Se requiere este campo
                     </p>
                     <p *ngIf="form.get('apellido').hasError('max')">
-                        El modelo no deberia ser superior al año 2022
+                        El apellido es demasiado extenso
                     </p>
                     <p *ngIf="form.get('apellido').hasError('min')">
-                        El modelo no puede ser inferior al año 1998
+                        El apellido es demasiado corto
                     </p>
                 </mat-hint>
             </mat-form-field>
@@ -83,7 +83,7 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>CELULAR AUX</mat-label>
-                <input matInput placeholder="Ej: 70kg" formControlName="celularAux" class="formu">
+                <input matInput placeholder="311*******" formControlName="celularAux" class="formu">
                 <mat-hint *ngIf="form.get('celularAux').errors && form.get('celularAux').touched">
                     <p *ngIf="form.get('celularAux').hasError('required')">
                         Se requiere este campo
@@ -101,7 +101,7 @@
         <div class="prueba">
             <mat-form-field appearance="outline" class="tamano">
                 <mat-label>USUARIO</mat-label>
-                <input matInput placeholder="Ej: 2020" formControlName="nick" class="formu">
+                <input matInput placeholder="Ej: conductor01" formControlName="nick" class="formu">
                 <mat-hint *ngIf="form.get('nick').errors && form.get('nick').touched">
                     <p *ngIf="form.get('nick').hasError('required')">
                         Se requiere este campo
@@ -202,6 +202,11 @@
                         {{ciudad.nombre}}
                     </mat-option>
                 </mat-select>
+                <mat-hint *ngIf="form.get('idCiudad').errors && form.get('idCiudad').touched">
+                    <p *ngIf="form.get('idCiudad').hasError('required')">
+                        Se requiere este campo
+                    </p>
+                </mat-hint>
             </mat-form-field>
         </div>
 

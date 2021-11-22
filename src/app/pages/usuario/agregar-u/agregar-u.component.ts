@@ -68,11 +68,6 @@ export class AgregarUComponent implements OnInit {
     this.datosConductor.tipoDocumento = new Documento();
     this.datosConductor.ciudad.idCiudad = this.form.value.idCiudad;
     
-    console.log("Nombre: "+ this.datosConductor.nombre);
-    console.log("Ciudad: "+ this.datosConductor.ciudad.idCiudad);
-    console.log("Rol: "+ new Rol().idRol);
-    console.log("Doc: "+this.datosConductor.tipoDocumento.idTipoDocumento);
-    
     this.usuarioService.agregarConductor(this.datosConductor).subscribe(data=>{
       this.openSnackBar("Conductor agregado correctamente");
       this.usuarioService.paginaReactiva.next(true);
