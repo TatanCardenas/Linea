@@ -1,25 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
-import { async } from 'rxjs/internal/scheduler/async';
-import { Vehiculo } from 'src/app/_model/Vehiculo';
-import { Contenido } from 'src/app/_model/Contenido';
-import { VehiculoService } from 'src/app/_service/vehiculo.service'
-import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Vehiculo } from 'src/app/_model/Vehiculo';
 import { ProgressService } from 'src/app/_service/progress.service';
-
+import { VehiculoService } from 'src/app/_service/vehiculo.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AsociarDialogComponent } from './asociar-dialog/asociar-dialog.component';
 
 @Component({
-  selector: 'app-vehiculo',
-  templateUrl: './vehiculo.component.html',
-  styleUrls: ['./vehiculo.component.css']
+  selector: 'app-asociacion',
+  templateUrl: './asociacion.component.html',
+  styleUrls: ['./asociacion.component.css']
 })
-export class VehiculoComponent implements OnInit {
-
-  displayedColumns: string[] = ['placa', 'modelo', 'marca', 'tipoVehiuclo', 'capacidad', 'editar'];
+export class AsociacionComponent implements OnInit {
+  displayedColumns: string[] = ['placa', 'asociados', 'asociar'];
   dataSource = new MatTableDataSource<Vehiculo>();
   public totalPages: number;
   public totalElement: number;
@@ -37,12 +34,12 @@ export class VehiculoComponent implements OnInit {
 
   @ViewChild('PVehiculo') VehiculoPaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  
   constructor(private vehiculoService: VehiculoService,
     private _snackBar: MatSnackBar,
     public route: ActivatedRoute,
-    private progressService: ProgressService) {
-  }
+    private progressService: ProgressService,
+    public dialog: MatDialog) { }
 
   async ngOnInit(): Promise<void> {
     this.progressService.progressBarReactiva.next(false);
@@ -62,8 +59,6 @@ export class VehiculoComponent implements OnInit {
       this.progressService.progressBarReactiva.next(true);
     });
   }
-  // MatPaginator Output
-  pageEvent: PageEvent;
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
@@ -79,9 +74,23 @@ export class VehiculoComponent implements OnInit {
 
   }
 
-  private delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+
+  openDialogAsociar(placa:string, id:number):void{
+    let placaV = placa;
+    let idV = id;
+    const dialogRef = this.dialog.open(AsociarDialogComponent, {
+      width: '600px',
+      data: {placa: placaV, id: idV},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //console.log(result);
+      //this.eliminarC(result);
+    });
   }
+
+
 
   private openSnackBar(mensaje: string) {
     this._snackBar.open(mensaje, 'Info', {
@@ -90,6 +99,7 @@ export class VehiculoComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

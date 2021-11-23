@@ -95,6 +95,17 @@
       </div>
 
       <div [hidden]="!flagSesion">
+        <div *ngIf="rolSesion==1">
+          <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
+            [routerLink]="['/asociados']">
+            <mat-icon>directions_car</mat-icon>
+            <span>Asociados</span>
+          </button>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+
+      <div [hidden]="!flagSesion">
         <div *ngIf="rolSesion == 2">
           <button mat-menu-item [disabled]="!flagSesion" (click)="drawer.toggle()" style="cursor: pointer"
             [routerLink]="['/ruta']">

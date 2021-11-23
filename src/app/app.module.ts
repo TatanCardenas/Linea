@@ -30,7 +30,11 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { EditarUComponent } from './pages/usuario/editar-u/editar-u.component';
 import { AgregarUComponent } from './pages/usuario/agregar-u/agregar-u.component';
 import { RutasComponent } from './pages/rutas/rutas.component';
-import { PagosComponent } from './pages/pagos/pagos.component'
+import { PagosComponent } from './pages/pagos/pagos.component';
+import { EliminarDialogComponent } from './pages/usuario/eliminar-dialog/eliminar-dialog.component';
+import { AsociacionComponent } from './pages/asociacion/asociacion.component';
+import { AsociarDialogComponent } from './pages/asociacion/asociar-dialog/asociar-dialog.component';
+import { DesasociarDialogComponent } from './pages/asociacion/desasociar-dialog/desasociar-dialog.component';
 
 export function tokenGetter() {
   let tk = sessionStorage.getItem(environment.TOKEN);
@@ -57,6 +61,10 @@ export function tokenGetter() {
     AgregarUComponent,
     RutasComponent,
     PagosComponent,
+    EliminarDialogComponent,
+    AsociacionComponent,
+    AsociarDialogComponent,
+    DesasociarDialogComponent,
     
   ],
   imports: [
@@ -76,6 +84,11 @@ export function tokenGetter() {
   providers: [
     [BnNgIdleService],
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
+  ],
+  entryComponents: [
+    EliminarDialogComponent,
+    AsociarDialogComponent,
+    DesasociarDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -36,11 +36,8 @@ export class AgregarUComponent implements OnInit {
     
     this.buildFrom();
     this.departamentoService.listar().subscribe((dep:Departamento[])=>{
-      (this.departamento=dep)
-      
+      (this.departamento=dep) 
     });
-   
-
   }
   private buildFrom() {
     

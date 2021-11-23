@@ -5,7 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Conductor } from 'src/app/_model/Conductor';
 import { ProgressService } from 'src/app/_service/progress.service';
-import { UsuarioService } from 'src/app/_service/usuario.service'
+import { UsuarioService } from 'src/app/_service/usuario.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EliminarDialogComponent } from './eliminar-dialog/eliminar-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuario',
@@ -14,7 +17,7 @@ import { UsuarioService } from 'src/app/_service/usuario.service'
 })
 export class UsuarioComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'direccion', 'nombreEmpresa', 'celular', 'correo', 'ciudad', 'editar'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'direccion', 'nombreEmpresa', 'celular', 'correo', 'ciudad', 'editar', 'borrar'];
   dataSource = new MatTableDataSource<Conductor>();
   public totalPages: number;
   public totalElement: number;
@@ -34,11 +37,13 @@ export class UsuarioComponent implements OnInit {
 
   constructor(private usuarioService: UsuarioService,
     private progressService: ProgressService,
-    public route: ActivatedRoute,) { }
+    public route: ActivatedRoute,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   async ngOnInit(): Promise<void> {
     this.progressService.progressBarReactiva.next(false);
-    await new Promise(f => setTimeout(f, 1500));
+    await new Promise(f => setTimeout(f, 1100));
     this.inicioU();
     this.usuarioService.paginaReactiva.subscribe(data => {
       this.inicioU();
@@ -75,5 +80,41 @@ export class UsuarioComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  eliminarC(id:number){
+    if(id != null){
+      this.usuarioService.eliminarConductor(id).subscribe(data =>{
+        console.log("Eliminado correctamente");
+        this.openSnackBar("Eliminado correctamente");
+        this.usuarioService.paginaReactiva.next(true);
+      });
+    }
+    
+  }
+
+  openDialog(user:string, idUser:number):void{
+    let conductor = new Conductor();
+    conductor.nombre = user;
+    conductor.idUsuario = idUser;
+    const dialogRef = this.dialog.open(EliminarDialogComponent, {
+      width: '380px',
+      data: {name: user, id: idUser},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //console.log(result);
+      this.eliminarC(result);
+    });
+  }
+
+  private openSnackBar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Información', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
 
 }

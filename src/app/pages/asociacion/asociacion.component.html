@@ -1,0 +1,46 @@
+
+<div >
+    <div>
+        <mat-form-field class="margen">
+            <mat-label>Filtro</mat-label>
+            <input matInput class="margen" (keyup)="applyFilter($event)" placeholder="Filtrar" #input>
+        </mat-form-field>
+    </div> 
+    <table mat-table [dataSource]="dataSource" matSort class="table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="placa">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef class="prueba"> Placa </th>
+            <td mat-cell *matCellDef="let element"> {{element.placa}} </td>
+        </ng-container>
+
+        <!-- Asociados Column -->
+        <ng-container matColumnDef="asociados">
+            <th mat-header-cell *matHeaderCellDef class="prueba"> Asociados </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="accent">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <!-- Asociar Column -->
+        <ng-container matColumnDef="asociar">
+            <th mat-header-cell *matHeaderCellDef class="prueba"> Asociar </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="openDialogAsociar(element.placa, element.idVehiculo)">
+                    <mat-icon>grade</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [hidden]="route.children.length !== 0" class="paginator" [length]="length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="cambioPagina($event)">
+    </mat-paginator>
+
+</div>
+
+<router-outlet></router-outlet>

@@ -30,7 +30,11 @@ export class UsuarioService {
     return this.http.get<ContenidoU>(`${this.url}/pageable?page=${page}&size=${size}`);
   }*/
   public listarConductor(page: number, size: number){
-
     return this.http.get<ContenidoU>(`${this.url}/pageablePorRol/${this.rol}/${page}/${size}`);
   }
+
+  public eliminarConductor(idUser: number){
+    return this.http.delete(`${this.url}/eliminar/${idUser}`);
+  }
+
 }

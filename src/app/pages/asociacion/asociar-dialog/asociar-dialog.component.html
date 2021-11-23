@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Vehiculo {{data.placa}}</h1>
+<div mat-dialog-content>
+  <p>¿Realmente desea eliminar a {{data.placa}} ?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Eliminar</button>
+</div>

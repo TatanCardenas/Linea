@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AsociacionComponent } from './pages/asociacion/asociacion.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { CiudadComponent } from './pages/departamento/ciudad/ciudad.component';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'datosc/:idConductor', component: EditarUComponent},
     {path: 'agregarc', component: AgregarUComponent},
   ], canActivate: [GuardianService]},
+  {path: 'asociados', component: AsociacionComponent, canActivate: [GuardianService]},
   {path: 'ruta', component: RutasComponent, canActivate: [GuardianService]},
   {path: 'pagos', component: PagosComponent, canActivate: [GuardianService]},
   {path: 'error', component: PageErrorComponent},
